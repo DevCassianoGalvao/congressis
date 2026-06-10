@@ -1,1 +1,4 @@
 .claude/
+config/config.php
+logs/admin.log
+logs/php_errors.log

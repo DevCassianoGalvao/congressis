@@ -122,11 +122,38 @@
     if(!consent) ok = false;
     if(!ok) return;
 
-    /* Show success state, then redirect */
-    modalForm.style.display    = 'none';
-    modalSuccess.style.display = '';
-    var url = buildCheckoutUrl(nome, email, tel);
-    setTimeout(function(){ window.location.href = url; }, 1600);
+    /* Mostrar estado de carregamento */
+    var submitBtn = document.querySelector('#regForm [type="submit"]');
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Aguarde…'; }
+
+    /* Enviar lead para o CRM antes de redirecionar */
+    var utms  = getUtms();
+    var payload = {
+      nome:     nome,
+      email:    email,
+      telefone: tel,
+      website:  '', // honeypot — nunca preencher
+      utm_source:   utms.utm_source   || '',
+      utm_medium:   utms.utm_medium   || '',
+      utm_campaign: utms.utm_campaign || '',
+      utm_content:  utms.utm_content  || '',
+      utm_term:     utms.utm_term     || ''
+    };
+
+    var checkoutUrl = buildCheckoutUrl(nome, email, tel);
+
+    fetch('/api/submit-lead.php', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    })
+    .catch(function(){ /* Falha silenciosa — não bloquear o checkout */ })
+    .finally(function(){
+      /* Redirecionar independente do resultado da API */
+      modalForm.style.display    = 'none';
+      modalSuccess.style.display = '';
+      setTimeout(function(){ window.location.href = checkoutUrl; }, 1400);
+    });
   });
 
   /* ---------- Stagger animate grid children (must run before reveal setup) ---------- */

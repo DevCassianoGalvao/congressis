@@ -1,0 +1,36 @@
+# Congressis — Apache config
+
+Options -Indexes
+
+# Bloquear acesso direto à pasta config/
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^config/.*$ - [F,L]
+    RewriteRule ^logs/.*$   - [F,L]
+</IfModule>
+
+# Bloquear acesso direto ao config.php independente do caminho
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Proteger o log de erros PHP
+<Files "php_errors.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Headers de segurança
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Charset padrão
+AddDefaultCharset UTF-8
+
+# Desabilitar assinatura do servidor
+ServerSignature Off
