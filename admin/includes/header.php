@@ -34,6 +34,12 @@ $current_page = $current_page ?? '';
           Scripts
         </a>
       </li>
+      <li class="<?= $current_page === 'sponsors' ? 'active' : '' ?>">
+        <a href="/admin/sponsors.php">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          Apoiadores
+        </a>
+      </li>
       <li class="<?= $current_page === 'utm'     ? 'active' : '' ?>">
         <a href="/admin/utm.php">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>

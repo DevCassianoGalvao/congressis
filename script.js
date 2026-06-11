@@ -66,73 +66,188 @@
     }
   });
 
-  /* ---------- WhatsApp phone mask ---------- */
-  var whatsInput = document.getElementById('whats');
-  whatsInput.addEventListener('input', function(){
-    var d = whatsInput.value.replace(/\D/g,'').slice(0,11);
-    var out = '';
-    if(d.length > 0) out = '(' + d.slice(0,2);
-    if(d.length >= 2) out += ') ';
-    if(d.length > 2) out += d.slice(2, d.length > 10 ? 7 : 6);
-    if(d.length > (d.length > 10 ? 7 : 6)) out += '-' + d.slice(d.length > 10 ? 7 : 6, 11);
-    whatsInput.value = out;
-  });
+  /* ============================================================
+     MÁSCARAS
+     ============================================================ */
 
-  /* ---------- Form validation & Kiwify redirect ---------- */
-  var KIWIFY_URL = 'https://pay.kiwify.com.br/89muAYk';
+  /* Celular: (00) 00000-0000 */
+  var celularInput = document.getElementById('celular');
+  if(celularInput){
+    celularInput.addEventListener('input', function(){
+      var d = this.value.replace(/\D/g,'').slice(0,11);
+      var out = '';
+      if(d.length > 0) out = '(' + d.slice(0,2);
+      if(d.length >= 2) out += ') ';
+      if(d.length > 2) out += d.slice(2, d.length > 10 ? 7 : 6);
+      if(d.length > (d.length > 10 ? 7 : 6)) out += '-' + d.slice(d.length > 10 ? 7 : 6, 11);
+      this.value = out;
+    });
+  }
 
-  function setErr(id, on){ document.getElementById(id).classList.toggle('err', on); }
+  /* CPF: 000.000.000-00 */
+  var cpfInput = document.getElementById('cpf');
+  if(cpfInput){
+    cpfInput.addEventListener('input', function(){
+      var d = this.value.replace(/\D/g,'').slice(0,11);
+      var out = d;
+      if(d.length > 9)      out = d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6,9)+'-'+d.slice(9);
+      else if(d.length > 6) out = d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6);
+      else if(d.length > 3) out = d.slice(0,3)+'.'+d.slice(3);
+      this.value = out;
+    });
+  }
+
+  /* CEP: 00000-000 */
+  var cepInput = document.getElementById('cep');
+  var cepTimeout = null;
+  if(cepInput){
+    cepInput.addEventListener('input', function(){
+      var d = this.value.replace(/\D/g,'').slice(0,8);
+      this.value = d.length > 5 ? d.slice(0,5)+'-'+d.slice(5) : d;
+      clearTimeout(cepTimeout);
+      if(d.length === 8){
+        cepTimeout = setTimeout(function(){ fetchCep(d); }, 400);
+      } else {
+        setErr('f-cep', false);
+      }
+    });
+  }
+
+  function fetchCep(cep){
+    fetch('https://viacep.com.br/ws/'+cep+'/json/')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if(data.erro){
+          setErr('f-cep', true);
+          var msg = document.querySelector('#f-cep .msg');
+          if(msg) msg.textContent = 'CEP não encontrado.';
+        } else {
+          setErr('f-cep', false);
+        }
+      })
+      .catch(function(){
+        /* Sem internet — não bloquear */
+        setErr('f-cep', false);
+      });
+  }
+
+  /* CNPJ: 00.000.000/0000-00 */
+  var cnpjInput = document.getElementById('cnpj');
+  if(cnpjInput){
+    cnpjInput.addEventListener('input', function(){
+      var d = this.value.replace(/\D/g,'').slice(0,14);
+      var out = d;
+      if(d.length > 12)      out = d.slice(0,2)+'.'+d.slice(2,5)+'.'+d.slice(5,8)+'/'+d.slice(8,12)+'-'+d.slice(12);
+      else if(d.length > 8)  out = d.slice(0,2)+'.'+d.slice(2,5)+'.'+d.slice(5,8)+'/'+d.slice(8);
+      else if(d.length > 5)  out = d.slice(0,2)+'.'+d.slice(2,5)+'.'+d.slice(5);
+      else if(d.length > 2)  out = d.slice(0,2)+'.'+d.slice(2);
+      this.value = out;
+    });
+  }
+
+  /* ============================================================
+     VALIDAÇÕES
+     ============================================================ */
+
+  function setErr(id, on){ var el = document.getElementById(id); if(el) el.classList.toggle('err', on); }
   function emailOk(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
   function phoneOk(v){ return v.replace(/\D/g,'').length >= 10; }
+  function cepOk(v){ return v.replace(/\D/g,'').length === 8; }
 
-  /* Collect UTM params from the landing page URL */
+  function cpfOk(v){
+    var n = v.replace(/\D/g,'');
+    if(n.length !== 11 || /^(\d)\1{10}$/.test(n)) return false;
+    var s = 0;
+    for(var i=0;i<9;i++) s += +n[i]*(10-i);
+    var r = (s*10)%11; if(r===10||r===11) r=0;
+    if(r !== +n[9]) return false;
+    s = 0;
+    for(var i=0;i<10;i++) s += +n[i]*(11-i);
+    r = (s*10)%11; if(r===10||r===11) r=0;
+    return r === +n[10];
+  }
+
+  function cnpjOk(v){
+    var n = v.replace(/\D/g,'');
+    if(n.length !== 14 || /^(\d)\1{13}$/.test(n)) return false;
+    function calc(n, len){
+      var weights = len === 12 ? [5,4,3,2,9,8,7,6,5,4,3,2] : [6,5,4,3,2,9,8,7,6,5,4,3,2];
+      var s = 0;
+      for(var i=0;i<len;i++) s += +n[i]*weights[i];
+      var r = s%11; return r < 2 ? 0 : 11-r;
+    }
+    return calc(n,12) === +n[12] && calc(n,13) === +n[13];
+  }
+
+  /* ============================================================
+     UTM + CHECKOUT URL
+     ============================================================ */
+  var KIWIFY_URL = 'https://pay.kiwify.com.br/89muAYk';
+
   function getUtms(){
-    var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-    var pageParams = new URLSearchParams(window.location.search);
+    var keys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var p = new URLSearchParams(window.location.search);
     var out = {};
-    utmKeys.forEach(function(k){ var v = pageParams.get(k); if(v) out[k] = v; });
+    keys.forEach(function(k){ var v = p.get(k); if(v) out[k] = v; });
     return out;
   }
 
-  /* Build Kiwify checkout URL with prefill + UTMs */
-  function buildCheckoutUrl(nome, email, tel){
+  function buildCheckoutUrl(nome, email, tel, cpf){
     var params = new URLSearchParams();
     if(nome)  params.set('name',  nome);
     if(email) params.set('email', email);
     var phone = tel.replace(/\D/g,'');
     if(phone) params.set('phone', phone);
+    var cpfClean = cpf.replace(/\D/g,'');
+    if(cpfClean) params.set('cpf', cpfClean);
     var utms = getUtms();
     Object.keys(utms).forEach(function(k){ params.set(k, utms[k]); });
     var qs = params.toString();
     return KIWIFY_URL + (qs ? '?' + qs : '');
   }
 
+  /* ============================================================
+     SUBMIT
+     ============================================================ */
   document.getElementById('regForm').addEventListener('submit', function(e){
     e.preventDefault();
+
+    /* Honeypot */
+    var hp = document.getElementById('website');
+    if(hp && hp.value) return;
+
     var nome    = document.getElementById('nome').value.trim();
+    var cpf     = cpfInput ? cpfInput.value.trim() : '';
+    var celular = celularInput ? celularInput.value.trim() : '';
     var email   = document.getElementById('email').value.trim();
-    var tel     = document.getElementById('whats').value.trim();
+    var cep     = cepInput ? cepInput.value.trim() : '';
+    var cnpj    = cnpjInput ? cnpjInput.value.trim() : '';
     var consent = document.getElementById('consent').checked;
     var ok = true;
 
-    if(nome.length < 3){ setErr('f-nome', true); ok = false; } else setErr('f-nome', false);
-    if(!emailOk(email)){ setErr('f-email', true); ok = false; } else setErr('f-email', false);
-    if(!phoneOk(tel)){   setErr('f-whats', true); ok = false; } else setErr('f-whats', false);
+    if(nome.length < 3)             { setErr('f-nome', true);   ok = false; } else setErr('f-nome', false);
+    if(!cpfOk(cpf))                 { setErr('f-cpf', true);    ok = false; } else setErr('f-cpf', false);
+    if(!phoneOk(celular))           { setErr('f-celular', true); ok = false; } else setErr('f-celular', false);
+    if(!emailOk(email))             { setErr('f-email', true);  ok = false; } else setErr('f-email', false);
+    if(cep && !cepOk(cep))         { setErr('f-cep', true);    ok = false; } else setErr('f-cep', false);
+    if(cnpj && !cnpjOk(cnpj))      { setErr('f-cnpj', true);   ok = false; } else setErr('f-cnpj', false);
+
     document.getElementById('f-consent').classList.toggle('err', !consent);
     if(!consent) ok = false;
     if(!ok) return;
 
-    /* Mostrar estado de carregamento */
     var submitBtn = document.querySelector('#regForm [type="submit"]');
     if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Aguarde…'; }
 
-    /* Enviar lead para o CRM antes de redirecionar */
-    var utms  = getUtms();
+    var utms = getUtms();
     var payload = {
       nome:     nome,
+      cpf:      cpf.replace(/\D/g,''),
+      telefone: celular,
       email:    email,
-      telefone: tel,
-      website:  '', // honeypot — nunca preencher
+      cep:      cep.replace(/\D/g,''),
+      cnpj:     cnpj.replace(/\D/g,''),
+      website:  '',
       utm_source:   utms.utm_source   || '',
       utm_medium:   utms.utm_medium   || '',
       utm_campaign: utms.utm_campaign || '',
@@ -140,23 +255,22 @@
       utm_term:     utms.utm_term     || ''
     };
 
-    var checkoutUrl = buildCheckoutUrl(nome, email, tel);
+    var checkoutUrl = buildCheckoutUrl(nome, email, celular, cpf);
 
     fetch('/api/submit-lead.php', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(payload)
     })
-    .catch(function(){ /* Falha silenciosa — não bloquear o checkout */ })
+    .catch(function(){ /* Falha silenciosa */ })
     .finally(function(){
-      /* Redirecionar independente do resultado da API */
       modalForm.style.display    = 'none';
       modalSuccess.style.display = '';
       setTimeout(function(){ window.location.href = checkoutUrl; }, 1400);
     });
   });
 
-  /* ---------- Stagger animate grid children (must run before reveal setup) ---------- */
+  /* ---------- Stagger animate grid children ---------- */
   var reducedMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var staggerSelectors = [
     {parent:'.pilares', children:'.pilar'},
@@ -169,16 +283,13 @@
     if(!parent) return;
     var children = parent.querySelectorAll(sel.children);
     children.forEach(function(el, i){
-      el.classList.remove('reveal'); // remove before reveal observer runs
+      el.classList.remove('reveal');
       el.classList.add('stagger-child');
       if(!reducedMotion) el.style.transitionDelay = (i * 80) + 'ms';
     });
     var sio = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if(en.isIntersecting){
-          en.target.classList.add('in');
-          sio.unobserve(en.target);
-        }
+        if(en.isIntersecting){ en.target.classList.add('in'); sio.unobserve(en.target); }
       });
     }, {threshold:0.08, rootMargin:'0px 0px -20px 0px'});
     children.forEach(function(el){ sio.observe(el); });

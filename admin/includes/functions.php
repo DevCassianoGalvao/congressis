@@ -93,6 +93,63 @@ function e(string $str): string {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ * Valida e salva um logo de apoiador enviado via upload.
+ * Retorna [bool $ok, ?string $error, ?string $filename].
+ */
+function validate_and_save_sponsor_logo(array $file, string $upload_dir): array {
+    $allowed_ext   = ['jpg', 'jpeg', 'png', 'svg', 'webp'];
+    $allowed_mimes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($ext, $allowed_ext, true)) {
+        return [false, 'Extensão não permitida. Use: jpg, png, svg, webp.', null];
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        return [false, 'Arquivo muito grande. Máximo 2 MB.', null];
+    }
+
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mime  = $finfo->file($file['tmp_name']);
+    if (!in_array($mime, $allowed_mimes, true)) {
+        return [false, 'Tipo de arquivo inválido. Envie uma imagem real (jpg, png, svg, webp).', null];
+    }
+
+    $new_filename = 'sponsor_' . uniqid() . '_' . time() . '.' . $ext;
+    $dest         = $upload_dir . $new_filename;
+
+    if ($ext === 'svg') {
+        $svg = file_get_contents($file['tmp_name']);
+        $svg = preg_replace('/<script[\s\S]*?<\/script>/i', '', $svg);
+        $svg = preg_replace('/\bon\w+\s*=/i', 'data-removed=', $svg);
+        if (file_put_contents($dest, $svg) === false) {
+            return [false, 'Erro ao salvar o arquivo SVG.', null];
+        }
+    } else {
+        if (!move_uploaded_file($file['tmp_name'], $dest)) {
+            return [false, 'Erro ao mover o arquivo enviado.', null];
+        }
+        $img = @imagecreatefromstring(file_get_contents($dest));
+        if ($img === false) {
+            @unlink($dest);
+            return [false, 'Imagem corrompida ou inválida.', null];
+        }
+        $saved = match ($ext) {
+            'png'  => imagepng($img,  $dest, 9),
+            'webp' => imagewebp($img, $dest, 90),
+            default => imagejpeg($img, $dest, 90),
+        };
+        imagedestroy($img);
+        if (!$saved) {
+            @unlink($dest);
+            return [false, 'Erro ao reprocessar a imagem.', null];
+        }
+    }
+
+    return [true, null, $new_filename];
+}
+
 function paginate(int $total, int $per_page, int $current_page): array {
     $total_pages = max(1, (int)ceil($total / $per_page));
     $current_page = max(1, min($current_page, $total_pages));

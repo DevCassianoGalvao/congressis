@@ -6,6 +6,8 @@
 - [ ] Fazer upload de todos os arquivos via FTP ou Gerenciador de Arquivos do cPanel
 - [ ] Confirmar que a pasta `config/` existe e tem permissão de escrita (chmod 755)
 - [ ] Confirmar que a pasta `logs/` existe e tem permissão de escrita (chmod 755)
+- [ ] Confirmar que a pasta `uploads/` existe e tem permissão de escrita (chmod 755)
+- [ ] Confirmar que `uploads/sponsors/.htaccess` foi enviado para o servidor
 
 ## Instalação
 - [ ] Acessar `https://seudominio.com/install.php` no browser
@@ -24,6 +26,10 @@
 - [ ] Testar exportação de CSV
 - [ ] Testar gerador de UTM
 - [ ] Configurar scripts de rastreamento (Meta Pixel, GTM) na tela de Scripts do painel
+- [ ] Fazer upload de um logo de teste no painel (Apoiadores) e verificar exibição na LP
+- [ ] Confirmar que arquivos `.php` não executam dentro de `uploads/sponsors/` (acessar via browser deve retornar 403)
+- [ ] Pasta `uploads/sponsors/` criada com permissão 755 ✓
+- [ ] `.htaccess` de proteção dentro de `uploads/sponsors/` confirmado ✓
 
 ## Segurança pós-deploy
 - [ ] `install.php` deletado ✓

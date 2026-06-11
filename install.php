@@ -23,8 +23,11 @@ function check_requirements(): array {
     $req['PDO']        = extension_loaded('pdo');
     $req['PDO_MySQL']  = extension_loaded('pdo_mysql');
     $req['JSON']       = extension_loaded('json');
-    $req['config/ gravável'] = is_writable(__DIR__ . '/config') || !file_exists(__DIR__ . '/config');
-    $req['logs/ gravável']   = is_writable(__DIR__ . '/logs')   || !file_exists(__DIR__ . '/logs');
+    $req['config/ gravável']          = is_writable(__DIR__ . '/config')          || !file_exists(__DIR__ . '/config');
+    $req['logs/ gravável']            = is_writable(__DIR__ . '/logs')            || !file_exists(__DIR__ . '/logs');
+    $req['uploads/ gravável']         = is_writable(__DIR__ . '/uploads')         || !file_exists(__DIR__ . '/uploads');
+    $req['Extensão GD (imagens)']     = extension_loaded('gd');
+    $req['Extensão fileinfo (MIME)']  = extension_loaded('fileinfo');
     return $req;
 }
 
@@ -38,6 +41,9 @@ CREATE TABLE IF NOT EXISTS `leads` (
   `nome`         VARCHAR(150) NOT NULL,
   `email`        VARCHAR(150) NOT NULL,
   `telefone`     VARCHAR(20)  NOT NULL DEFAULT '',
+  `cpf`          CHAR(11)     NULL,
+  `cep`          CHAR(8)      NULL,
+  `cnpj`         CHAR(14)     NULL,
   `utm_source`   VARCHAR(100) NOT NULL DEFAULT '',
   `utm_medium`   VARCHAR(100) NOT NULL DEFAULT '',
   `utm_campaign` VARCHAR(100) NOT NULL DEFAULT '',
@@ -78,6 +84,19 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `sponsors` (
+  `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `category`   ENUM('parceiros','patrocinio','apoio','expositores') NOT NULL,
+  `name`       VARCHAR(150) NOT NULL,
+  `logo_path`  VARCHAR(255) NOT NULL,
+  `url`        VARCHAR(255) DEFAULT NULL,
+  `sort_order` INT          NOT NULL DEFAULT 0,
+  `active`     TINYINT(1)   NOT NULL DEFAULT 1,
+  `created_at` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_category_order` (`category`, `sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ";
 
 // ── Processar formulário ──
@@ -117,6 +136,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $all_ok) {
                 if ($sql) $pdo->exec($sql . ';');
             }
 
+            // Adicionar colunas novas com segurança (idempotente)
+            $alter_columns = [
+                'cpf'  => "ALTER TABLE `leads` ADD COLUMN `cpf`  CHAR(11)  NULL AFTER `telefone`",
+                'cep'  => "ALTER TABLE `leads` ADD COLUMN `cep`  CHAR(8)   NULL AFTER `cpf`",
+                'cnpj' => "ALTER TABLE `leads` ADD COLUMN `cnpj` CHAR(14)  NULL AFTER `cep`",
+            ];
+            foreach ($alter_columns as $col => $alter_sql) {
+                $exists = $pdo->query(
+                    "SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+                     WHERE TABLE_SCHEMA = DATABASE()
+                       AND TABLE_NAME   = 'leads'
+                       AND COLUMN_NAME  = '$col'"
+                )->fetchColumn();
+                if (!$exists) $pdo->exec($alter_sql);
+            }
+
             // Inserir scripts padrão
             $pdo->exec("
                 INSERT IGNORE INTO site_scripts (location, script_content, updated_by)
@@ -144,6 +179,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $all_ok) {
                 . "ini_set('display_errors', 0);" . PHP_EOL
                 . "ini_set('log_errors', 1);" . PHP_EOL
                 . "ini_set('error_log', __DIR__ . '/../logs/php_errors.log');" . PHP_EOL;
+
+            // Criar pasta de uploads de sponsors
+            $uploads_dir = __DIR__ . '/uploads/sponsors';
+            if (!is_dir($uploads_dir)) {
+                mkdir($uploads_dir, 0755, true);
+            }
+            $uploads_htaccess = $uploads_dir . '/.htaccess';
+            if (!file_exists($uploads_htaccess)) {
+                file_put_contents($uploads_htaccess,
+                    "<FilesMatch \"\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$\">\n"
+                    . "    Order allow,deny\n"
+                    . "    Deny from all\n"
+                    . "</FilesMatch>\n"
+                    . "Options -Indexes\n"
+                    . "<IfModule mod_headers.c>\n"
+                    . "    Header set X-Content-Type-Options nosniff\n"
+                    . "</IfModule>\n"
+                );
+            }
 
             if (!file_put_contents($config_path, $config_content)) {
                 $errors[] = 'Não foi possível gravar config/config.php. Verifique as permissões da pasta.';

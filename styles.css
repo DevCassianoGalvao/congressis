@@ -131,7 +131,9 @@ section{position:relative}
 }
 .hd-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 .brand{display:flex;align-items:center;gap:.7rem}
-.brand-logo{height:50px;width:auto;transition:height .4s var(--ease)}
+.brand-logo{height:44px;width:auto;transition:height .4s var(--ease)}
+.logo-light-hd{filter:none}
+.logo-dark-hd{height:40px}
 .nav{display:flex;align-items:center;gap:2rem}
 .nav a{
   font-size:.92rem;font-weight:500;color:rgba(246,242,233,.86);
@@ -511,6 +513,7 @@ section{position:relative}
 .modal-close svg{width:20px;height:20px}
 .modal-head{text-align:center;margin-bottom:1.8rem}
 .modal-head .emb{width:54px;margin:0 auto .9rem}
+.modal-logo{height:56px;width:auto;margin:0 auto 1rem;display:block}
 .modal-head h3{font-size:1.9rem;color:var(--green-deep)}
 .modal-head p{margin-top:.5rem;font-size:.95rem;color:var(--ink-soft)}
 .field{margin-bottom:1.1rem}
@@ -531,6 +534,10 @@ section{position:relative}
 .modal .btn{width:100%;justify-content:center}
 .modal-secure{margin-top:1rem;text-align:center;font-size:.82rem;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;gap:.5rem}
 .modal-secure svg{width:14px;height:14px;color:var(--gold)}
+.field label .optional{font-weight:400;color:var(--ink-soft);font-size:.8em}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+.form-row .field{margin-bottom:1.1rem}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
 .modal-success{text-align:center;padding:1rem 0}
 .modal-success .ok{width:70px;height:70px;margin:0 auto 1.3rem;border-radius:50%;background:rgba(46,79,62,.12);display:grid;place-items:center;color:var(--green-mid)}
 .modal-success .ok svg{width:36px;height:36px}
@@ -648,4 +655,18 @@ body.lock{overflow:hidden}
 .stagger-child.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .stagger-child{opacity:1;transform:none;transition:none}
+}
+
+/* ============================================================
+   TIPOGRAFIA — orphan words + hyphens
+   ============================================================ */
+.head h2,.hero h1,.pilar h3,.viver-card h3,.speaker h3,.prop-card h3,.local-card .name,.modal-head h3,.modal-success h3,.cta-final h2{
+  text-wrap:balance
+}
+.sobre-body p,.head p.lead,.prop-card p,.cta-final p,.ideal-bio,.day-band p,.local-card .addr{
+  hyphens:auto;overflow-wrap:break-word
+}
+@media(max-width:620px){
+  .ideal-bio{font-size:.93rem}
+  .hero .sub{max-width:38ch}
 }
