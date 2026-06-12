@@ -154,6 +154,17 @@ try {
         $ua,
     ]);
 
+    // Notificação por e-mail — falha silenciosa, não bloqueia o lead
+    send_lead_notification([
+        'nome'       => $nome_safe,
+        'email'      => $email_safe,
+        'telefone'   => $tel_digits,
+        'cpf'        => $cpf_raw,
+        'cep'        => $cep_raw,
+        'cnpj'       => $cnpj_raw,
+        'utm_source' => $utms['utm_source'],
+    ]);
+
     echo json_encode(['success' => true]);
 } catch (Throwable $e) {
     error_log('submit-lead insert error: ' . $e->getMessage());

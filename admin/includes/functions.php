@@ -93,6 +93,94 @@ function e(string $str): string {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
+function send_lead_notification(array $lead): bool {
+    if (!defined('BREVO_API_KEY') || BREVO_API_KEY === 'SUA_API_KEY_AQUI') {
+        return false; // Não configurado ainda
+    }
+
+    $payload = [
+        'sender' => [
+            'email' => BREVO_SENDER_EMAIL,
+            'name'  => BREVO_SENDER_NAME,
+        ],
+        'to' => [[
+            'email' => BREVO_NOTIFY_EMAIL,
+            'name'  => BREVO_NOTIFY_NAME,
+        ]],
+        'subject'     => '🎉 Novo lead no Congressis: ' . $lead['nome'],
+        'htmlContent' => build_lead_email_html($lead),
+    ];
+
+    $ch = curl_init('https://api.brevo.com/v3/smtp/email');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_HTTPHEADER     => [
+            'accept: application/json',
+            'api-key: ' . BREVO_API_KEY,
+            'content-type: application/json',
+        ],
+        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_TIMEOUT    => 10,
+    ]);
+
+    $response  = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($http_code !== 201) {
+        write_log('[Brevo] Falha ao enviar e-mail. HTTP ' . $http_code . ' — ' . $response);
+        return false;
+    }
+    return true;
+}
+
+function build_lead_email_html(array $lead): string {
+    $nome     = htmlspecialchars($lead['nome']      ?? '');
+    $email    = htmlspecialchars($lead['email']     ?? '');
+    $telefone = htmlspecialchars($lead['telefone']  ?? '—');
+    $cpf_raw  = $lead['cpf']  ?? '';
+    $cep_raw  = $lead['cep']  ?? '';
+    $cnpj_raw = $lead['cnpj'] ?? '';
+    $utm      = htmlspecialchars($lead['utm_source'] ?? '—');
+    $data     = date('d/m/Y \à\s H:i');
+
+    // Formatar CPF, CEP, CNPJ
+    $cpf_fmt  = strlen($cpf_raw)  === 11 ? substr($cpf_raw,0,3).'.'.substr($cpf_raw,3,3).'.'.substr($cpf_raw,6,3).'-'.substr($cpf_raw,9,2)  : ($cpf_raw  ?: '—');
+    $cep_fmt  = strlen($cep_raw)  === 8  ? substr($cep_raw,0,5).'-'.substr($cep_raw,5)                                                        : ($cep_raw  ?: '—');
+    $cnpj_fmt = strlen($cnpj_raw) === 14 ? substr($cnpj_raw,0,2).'.'.substr($cnpj_raw,2,3).'.'.substr($cnpj_raw,5,3).'/'.substr($cnpj_raw,8,4).'-'.substr($cnpj_raw,12) : ($cnpj_raw ?: '—');
+
+    $wa_num = preg_replace('/\D/', '', $telefone);
+
+    return "
+    <div style='font-family:Georgia,serif;max-width:520px;margin:0 auto;background:#faf7ef;border-radius:8px;overflow:hidden;'>
+        <div style='background:#13251b;padding:28px 32px;text-align:center;'>
+            <p style='color:#c9a24b;letter-spacing:.15em;font-size:12px;margin:0 0 6px;font-family:Arial,sans-serif;text-transform:uppercase;'>Novo Lead</p>
+            <h1 style='color:#f6f2e9;font-size:22px;margin:0;'>Congressis – Saúde Integrativa na Serra</h1>
+        </div>
+        <div style='padding:28px 32px;'>
+            <p style='color:#6f7a6b;font-size:13px;margin:0 0 20px;font-family:Arial,sans-serif;'>Recebido em {$data}</p>
+            <table style='width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px;'>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;width:35%;'>Nome</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;font-weight:bold;'>{$nome}</td></tr>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;'>E-mail</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;'><a href='mailto:{$email}' style='color:#b8893b;'>{$email}</a></td></tr>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;'>Celular</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;'><a href='https://wa.me/55{$wa_num}' style='color:#b8893b;'>{$telefone}</a></td></tr>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;'>CPF</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;'>{$cpf_fmt}</td></tr>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;'>CEP</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;'>{$cep_fmt}</td></tr>
+                <tr><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#6f7a6b;'>CNPJ</td><td style='padding:10px 0;border-bottom:1px solid #e4dcc8;color:#2b2b27;'>{$cnpj_fmt}</td></tr>
+                <tr><td style='padding:10px 0;color:#6f7a6b;'>Origem (UTM)</td><td style='padding:10px 0;color:#2b2b27;'>{$utm}</td></tr>
+            </table>
+            <div style='margin-top:24px;text-align:center;'>
+                <a href='https://wa.me/55{$wa_num}' style='display:inline-block;background:#25d366;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;margin-right:8px;'>💬 WhatsApp</a>
+                <a href='mailto:{$email}' style='display:inline-block;background:#13251b;color:#f6f2e9;padding:12px 24px;border-radius:6px;text-decoration:none;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;'>✉️ E-mail</a>
+            </div>
+        </div>
+        <div style='background:#13251b;padding:16px 32px;text-align:center;'>
+            <p style='color:#6f7a6b;font-size:12px;margin:0;font-family:Arial,sans-serif;'>© 2026 Congressis – Saúde Integrativa na Serra</p>
+        </div>
+    </div>
+    ";
+}
+
 /**
  * Valida e salva um logo de apoiador enviado via upload.
  * Retorna [bool $ok, ?string $error, ?string $filename].
