@@ -262,20 +262,20 @@ section{position:relative}
    ============================================================ */
 .pilares{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:3.5rem}
 .pilar{
-  padding:2.8rem 1.6rem 2.4rem;border-radius:var(--r);background:var(--cream-2);
+  padding:2rem 1.4rem 1.8rem;border-radius:var(--r);background:var(--cream-2);
   border:1px solid var(--line-soft);text-align:center;
   transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);
 }
 .pilar:hover{transform:translateY(-8px);box-shadow:0 28px 56px -30px rgba(19,37,27,.38);border-color:rgba(184,137,59,.45)}
 .pilar-ic{
-  width:68px;height:68px;margin:0 auto 1.6rem;border-radius:50%;
+  width:54px;height:54px;margin:0 auto 1.2rem;border-radius:50%;
   display:grid;place-items:center;background:rgba(184,137,59,.1);color:var(--gold);
   border:1px solid rgba(184,137,59,.3);
   transition:background .4s var(--ease),border-color .4s var(--ease);
 }
 .pilar:hover .pilar-ic{background:rgba(184,137,59,.18);border-color:rgba(184,137,59,.55)}
-.pilar-ic svg{width:32px;height:32px}
-.pilar h3{font-size:1.45rem;color:var(--green-deep)}
+.pilar-ic svg{width:24px;height:24px}
+.pilar h3{font-size:1.3rem;color:var(--green-deep)}
 .pilar p{margin-top:.3rem;font-size:.9rem;color:var(--ink-soft)}
 
 /* ============================================================
@@ -599,8 +599,8 @@ section{position:relative}
 }
 @media(max-width:620px){
   body{font-size:16px}
-  .pilares{grid-template-columns:1fr}
-  .pilares .pilar:nth-child(5){grid-column:auto}
+  .pilares{grid-template-columns:1fr 1fr}
+  .pilares .pilar:nth-child(5){grid-column:span 2}
   .viver-grid{grid-template-columns:1fr}
   .speakers{grid-template-columns:1fr;gap:3rem}
   .dif-grid{grid-template-columns:1fr}
@@ -613,8 +613,8 @@ section{position:relative}
   .hero-meta{flex-direction:column;gap:.8rem}
 }
 @media(max-width:400px){
-  .pilares{grid-template-columns:1fr}
-  .pilares .pilar:nth-child(5){grid-column:auto}
+  .pilares{grid-template-columns:1fr 1fr}
+  .pilares .pilar:nth-child(5){grid-column:span 2}
   .hero h1{font-size:2rem}
 }
 
