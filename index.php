@@ -436,9 +436,6 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
           <div class="logo-slot">
             <img src="assets/logos/logo-cro-rj.png" alt="CRO-RJ – Conselho Regional de Odontologia do Rio de Janeiro" loading="lazy">
           </div>
-          <div class="logo-slot">
-            <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
-          </div>
           <?php endif; ?>
           <?php foreach ($sponsors_by_cat[$_cat_key] ?? [] as $_s): ?>
           <div class="logo-slot">
@@ -452,6 +449,14 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         </div>
       </div>
       <?php endforeach; ?>
+      <div class="support-group reveal">
+        <div class="gh"><h3>Apoio Institucional</h3><span class="ln"></span></div>
+        <div class="logo-grid">
+          <div class="logo-slot">
+            <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
