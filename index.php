@@ -434,6 +434,9 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         <div class="logo-grid">
           <?php if ($is_apoio): ?>
           <div class="logo-slot">
+            <img src="assets/logos/logo-cro-rj.png" alt="CRO-RJ – Conselho Regional de Odontologia do Rio de Janeiro" loading="lazy">
+          </div>
+          <div class="logo-slot">
             <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
           </div>
           <?php endif; ?>
