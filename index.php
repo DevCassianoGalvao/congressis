@@ -425,14 +425,19 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <span class="eyebrow">Quem constrói o Congressis</span>
       <h2>Apoiadores</h2>
     </div>
-    <?php if (!empty($sponsors_by_cat)): ?>
     <div class="support">
       <?php foreach ($_sponsor_labels as $_cat_key => $_cat_label):
-        if (empty($sponsors_by_cat[$_cat_key])) continue; ?>
+        $is_apoio = $_cat_key === 'apoio';
+        if (empty($sponsors_by_cat[$_cat_key]) && !$is_apoio) continue; ?>
       <div class="support-group reveal">
         <div class="gh"><h3><?= htmlspecialchars($_cat_label) ?></h3><span class="ln"></span></div>
         <div class="logo-grid">
-          <?php foreach ($sponsors_by_cat[$_cat_key] as $_s): ?>
+          <?php if ($is_apoio): ?>
+          <div class="logo-slot">
+            <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
+          </div>
+          <?php endif; ?>
+          <?php foreach ($sponsors_by_cat[$_cat_key] ?? [] as $_s): ?>
           <div class="logo-slot">
             <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
             <img src="<?= htmlspecialchars($_s['logo_path']) ?>"
@@ -445,7 +450,6 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       </div>
       <?php endforeach; ?>
     </div>
-    <?php endif; ?>
   </div>
 </section>
 
@@ -534,7 +538,6 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     <button class="modal-close" data-modal-close aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div id="modalForm">
       <div class="modal-head">
-        <img src="assets/logos/logo verde novo.png" alt="Congressis" class="modal-logo">
         <h3 id="modalTitle">Garanta sua vaga</h3>
         <p>1º Lote · R$ 197,00. Preencha seus dados para seguir ao pagamento.</p>
       </div>

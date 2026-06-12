@@ -511,11 +511,21 @@ section{position:relative}
 .modal-close{position:absolute;top:1.1rem;right:1.1rem;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink-soft);transition:.3s}
 .modal-close:hover{background:var(--cream-3);color:var(--green-deep)}
 .modal-close svg{width:20px;height:20px}
-.modal-head{text-align:center;margin-bottom:1.8rem}
+.modal-head{text-align:center;margin-bottom:1.2rem}
 .modal-head .emb{width:54px;margin:0 auto .9rem}
-.modal-logo{height:56px;width:auto;margin:0 auto 1rem;display:block}
-.modal-head h3{font-size:1.9rem;color:var(--green-deep)}
-.modal-head p{margin-top:.5rem;font-size:.95rem;color:var(--ink-soft)}
+.modal-head h3{font-size:1.7rem;color:var(--green-deep)}
+.modal-head p{margin-top:.4rem;font-size:.9rem;color:var(--ink-soft)}
+@media(max-height:700px),(max-width:480px){
+  .modal-card{padding:1.2rem 1.1rem}
+  .modal-head{margin-bottom:.8rem}
+  .modal-head h3{font-size:1.45rem}
+  .field{margin-bottom:.7rem}
+  .field label{font-size:.78rem;margin-bottom:.3rem}
+  .field input{padding:.55rem .7rem;font-size:.9rem}
+  .consent{margin:.8rem 0}
+  .consent span{font-size:.78rem}
+  .modal-secure{margin-top:.6rem;font-size:.75rem}
+}
 .field{margin-bottom:1.1rem}
 .field label{display:block;font-size:.84rem;font-weight:600;color:var(--green-deep);margin-bottom:.45rem}
 .field input{
