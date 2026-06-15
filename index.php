@@ -158,14 +158,14 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <p class="lead">Um encontro para profissionais, estudantes e empreendedores que acreditam em uma saúde mais integrada, humana e baseada em evidências.</p>
     </div>
     <div class="tags reveal">
-      <span class="tag">Cirurgiões-dentistas</span>
+      <span class="tag">Dentistas</span>
       <span class="tag">Médicos</span>
+      <span class="tag">Biomédicos</span>
       <span class="tag">Enfermeiros</span>
       <span class="tag">Fisioterapeutas</span>
       <span class="tag">Psicólogos</span>
-      <span class="tag">Terapeutas integrativos</span>
       <span class="tag">Nutricionistas</span>
-      <span class="tag">Estudantes da área da saúde</span>
+      <span class="tag">Terapeutas integrativos</span>
     </div>
   </div>
 </section>
