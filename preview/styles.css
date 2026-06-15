@@ -492,6 +492,22 @@ section{position:relative}
 .cta-final .btn{margin-top:2.4rem}
 
 /* ============================================================
+   BACK TO TOP
+   ============================================================ */
+.back-top{
+  position:fixed;bottom:1.8rem;right:1.8rem;z-index:50;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--green-deep);color:var(--gold-light);
+  display:grid;place-items:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);
+  opacity:0;transform:translateY(12px);pointer-events:none;
+  transition:opacity .3s,transform .3s;
+}
+.back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-top:hover{background:var(--green-mid);transform:translateY(-2px)}
+.back-top svg{width:20px;height:20px}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .ft{background:var(--green-deep-2);color:rgba(246,242,233,.7);padding-block:clamp(3.5rem,6vw,5rem) 2rem}

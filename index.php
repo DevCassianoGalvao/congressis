@@ -33,6 +33,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <img src="assets/logos/logo verde novo.png" alt="SYS Congressis" class="brand-logo logo-dark-hd">
     </a>
     <nav class="nav" aria-label="Navegação principal">
+      <a href="#top">Início</a>
       <a href="#sobre">Sobre</a>
       <a href="#palestrantes">Palestrantes</a>
       <a href="#ingressos">Ingressos</a>
@@ -49,6 +50,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <!-- mobile menu -->
 <div class="mmenu" id="mmenu">
   <button class="mmenu-close" id="mmClose" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <a href="#top" data-mm>Início</a>
   <a href="#sobre" data-mm>Sobre</a>
   <a href="#palestrantes" data-mm>Palestrantes</a>
   <a href="#ingressos" data-mm>Ingressos</a>
@@ -656,5 +658,8 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 </template>
 
 <script src="script.js"></script>
+<button id="backTop" class="back-top" aria-label="Voltar ao topo">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
 </body>
 </html>

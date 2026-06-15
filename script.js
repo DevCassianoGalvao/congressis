@@ -6,11 +6,14 @@
 
   /* ---------- Sticky header ---------- */
   var hd = document.getElementById('hd');
+  var backTop = document.getElementById('backTop');
   function onScroll(){
     hd.classList.toggle('scrolled', window.scrollY > 40);
+    if(backTop) backTop.classList.toggle('visible', window.scrollY > 400);
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+  if(backTop) backTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 
   /* ---------- Mobile menu ---------- */
   var burger  = document.getElementById('burger');
