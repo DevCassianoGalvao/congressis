@@ -557,7 +557,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     <div class="ft-grid">
       <div class="ft-brand">
         <img src="assets/logos/logo-branca-sem-fundo.png" alt="Congressis" class="ft-logo">
-        <p><strong style="color:var(--cream-2)">Congressis – Saúde Integrativa na Serra.</strong> Realização: Dra. Adryelle Huber Puga e Dra. Aretuza Pires dos Santos Lattanzi.</p>
+        <p><strong style="color:var(--cream-2)">Congressis – Saúde Integrativa na Serra.</strong> Realização: Dra. Adryelle Huber Puga e&nbsp;<span style="white-space:nowrap">Dra. Aretuza Pires dos Santos Lattanzi.</span></p>
       </div>
       <div class="ft-col">
         <h4>Contato</h4>
@@ -567,7 +567,6 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <div class="ft-col">
         <h4>Instagram</h4>
         <a href="https://www.instagram.com/congressis_brasil" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@congressis_brasil</a>
-        <a href="https://www.instagram.com/congressis_rio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@congressis_rio</a>
       </div>
     </div>
     <div class="ft-bottom">
