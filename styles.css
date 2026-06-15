@@ -457,6 +457,11 @@ section{position:relative}
 .logo-slot--lg{aspect-ratio:2/1;padding:1.4rem;border:none;background:transparent;box-shadow:none}
 .logo-slot--lg img{max-height:90px;max-width:220px}
 .logo-slot--lg:hover{transform:none;box-shadow:none}
+.logo-slot--fitos img{max-height:80px;max-width:180px}
+@media(max-width:768px){
+  .gh--center{justify-content:center}
+  .logo-grid--center{margin:0 auto}
+}
 /* Sub-blocos Patrocínio / Expositores */
 .support-subgrid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .support-sub-label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.8rem}

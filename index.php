@@ -430,9 +430,9 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
             <img src="assets/logos/logos-15-06-2026/PHOTO-2026-06-13-10-46-39.jpg.jpeg" alt="ABO – Rio de Janeiro" loading="lazy">
           </div>
           <div class="logo-slot">
-            <img src="assets/logos/logos-15-06-2026/PHOTO-2026-06-13-10-42-10.jpg.jpeg" alt="ABO – Região dos Lagos" loading="lazy">
+            <img src="assets/logos/logos-15-06-2026/logo nova ABO.png" alt="ABO – Região dos Lagos" loading="lazy">
           </div>
-          <div class="logo-slot">
+          <div class="logo-slot logo-slot--fitos">
             <img src="assets/logos/logos-15-06-2026/logo-redesfito-vertical (1) (2).png" alt="Rede Fitos" loading="lazy">
           </div>
           <?php foreach ($sponsors_by_cat['apoio'] ?? [] as $_s): ?>
@@ -469,7 +469,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
             <span class="support-sub-label">Patrocínio</span>
             <div class="logo-grid">
               <div class="logo-slot">
-                <img src="assets/logos/logos-15-06-2026/IMG_7424 (1).png" alt="Cronotherapy" loading="lazy">
+                <img src="assets/logos/logos-15-06-2026/IMG_7424 (1)-Photoroom.png" alt="Cronotherapy" loading="lazy">
               </div>
               <?php foreach ($sponsors_by_cat['patrocinio'] ?? [] as $_s): ?>
               <div class="logo-slot">
