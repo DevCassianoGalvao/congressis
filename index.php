@@ -152,8 +152,8 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
   <div class="wrap">
     <div class="head head--center reveal">
       <span class="eyebrow">Para quem é</span>
-      <h2>Esse dia foi pensado para você</h2>
-      <p class="lead">Se o seu trabalho, ou o seu interesse, passa pelo cuidado do ser humano, seu lugar é aqui.</p>
+      <h2>Para quem é o Congressis?</h2>
+      <p class="lead">Um encontro para profissionais, estudantes e empreendedores que acreditam em uma saúde mais integrada, humana e baseada em evidências.</p>
     </div>
     <div class="tags reveal">
       <span class="tag">Cirurgiões-dentistas</span>
@@ -162,11 +162,8 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <span class="tag">Fisioterapeutas</span>
       <span class="tag">Psicólogos</span>
       <span class="tag">Terapeutas integrativos</span>
-      <span class="tag">Biomédicos</span>
       <span class="tag">Nutricionistas</span>
       <span class="tag">Estudantes da área da saúde</span>
-      <span class="tag">Profissionais interessados em saúde integrativa</span>
-      <span class="tag">Interessados em bem-estar e qualidade de vida</span>
     </div>
   </div>
 </section>
@@ -180,39 +177,24 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     </div>
     <div class="viver-grid">
       <div class="viver-card reveal">
-        <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 0-4 4v6a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4Z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg></div>
-        <h3>Palestras com especialistas</h3>
-        <p>Vozes de referência em odontologia integrativa, terapias complementares e ciência aplicada ao cuidado.</p>
-      </div>
-      <div class="viver-card reveal">
         <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5V5a2 2 0 0 1 2-2h12a1 1 0 0 1 1 1v15M6 17h13M6 21h13"/></svg></div>
-        <h3>Conteúdo científico e prático</h3>
-        <p>Aprendizado baseado em evidências, aplicável diretamente à prática clínica.</p>
+        <h3>Conteúdo Científico</h3>
+        <p>Conhecimento atualizado, evidências e aplicações práticas para o cuidado integral.</p>
       </div>
       <div class="viver-card reveal">
         <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-        <h3>Práticas integrativas na saúde</h3>
-        <p>Vivências opcionais de autocuidado ao longo de todo o dia.</p>
+        <h3>Vivências Integrativas</h3>
+        <p>Experiências que unem ciência, bem-estar e práticas complementares em saúde.</p>
       </div>
       <div class="viver-card reveal">
         <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17.5" cy="9" r="2.3"/><path d="M16 14.5a5 5 0 0 1 5 5"/></svg></div>
-        <h3>Networking com profissionais da região</h3>
-        <p>Conexões estratégicas entre diferentes especialidades da saúde.</p>
+        <h3>Networking</h3>
+        <p>Trocas, conexões e oportunidades entre profissionais de diferentes especialidades.</p>
       </div>
       <div class="viver-card reveal">
         <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9h18M3 9l2-5h14l2 5M3 9v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M9 13h6"/></svg></div>
-        <h3>Feira de expositores</h3>
-        <p>Conheça produtos, serviços e inovações do setor da saúde integrativa.</p>
-      </div>
-      <div class="viver-card reveal">
-        <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 9.2 8.6 2 9.2l5.5 4.7L5.8 21 12 17.2 18.2 21l-1.7-7.1L22 9.2l-7.2-.6Z"/></svg></div>
-        <h3>Sorteios</h3>
-        <p>Participe dos sorteios especiais ao longo do evento.</p>
-      </div>
-      <div class="viver-card reveal">
-        <div class="viver-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1 7.8 7.8 7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></div>
-        <h3>Experiências de conexão</h3>
-        <p>Momentos pensados para reconectar corpo e mente ao longo do dia.</p>
+        <h3>Feira de Expositores</h3>
+        <p>Empresas, produtos e soluções inovadoras para uma saúde mais integrada.</p>
       </div>
     </div>
   </div>
@@ -296,16 +278,14 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <section class="sec bg-cream">
   <div class="wrap">
     <div class="head head--center reveal">
-      <span class="eyebrow">Diferenciais</span>
+      <span class="eyebrow">Mais do que um congresso</span>
       <h2>O que torna o Congressis único</h2>
     </div>
     <div class="dif-grid">
-      <div class="dif reveal"><div class="dif-num">01</div><h3>Pioneirismo</h3><p>O primeiro congresso da região com foco em saúde integrativa multidisciplinar.</p></div>
-      <div class="dif reveal"><div class="dif-num">02</div><h3>Ciência + prática</h3><p>Integração entre conhecimento científico e práticas complementares.</p></div>
-      <div class="dif reveal"><div class="dif-num">03</div><h3>Networking qualificado</h3><p>Conexão entre profissionais de diferentes especialidades.</p></div>
-      <div class="dif reveal"><div class="dif-num">04</div><h3>Conteúdo aplicável</h3><p>Conhecimento que se traduz diretamente na sua prática profissional.</p></div>
-      <div class="dif reveal"><div class="dif-num">05</div><h3>Vivências integrativas</h3><p>Experiências opcionais de autocuidado ao longo de todo o dia.</p></div>
-      <div class="dif reveal"><div class="dif-num">06</div><h3>Encontro multidisciplinar</h3><p>Profissionais de diversas áreas reunidos em um só lugar.</p></div>
+      <div class="dif reveal"><div class="dif-num">01</div><h3>Um evento pioneiro na região</h3><p>O primeiro congresso da Serra Fluminense voltado à saúde integrativa e multidisciplinar.</p></div>
+      <div class="dif reveal"><div class="dif-num">02</div><h3>Ciência que gera transformação</h3><p>Conhecimento atualizado, baseado em evidências e aplicável à prática clínica.</p></div>
+      <div class="dif reveal"><div class="dif-num">03</div><h3>Conexões que ampliam possibilidades</h3><p>Trocas entre profissionais de diferentes especialidades, promovendo novas perspectivas e oportunidades.</p></div>
+      <div class="dif reveal"><div class="dif-num">04</div><h3>Experiência além das palestras</h3><p>Vivências integrativas e momentos de autocuidado que tornam o aprendizado mais completo.</p></div>
     </div>
   </div>
 </section>
@@ -374,8 +354,8 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         <div class="ideal-text">
           <div class="ideal-role">Coidealizadora</div>
           <h3 class="ideal-name">Dra. Adryelle Huber Puga</h3>
-          <p class="ideal-tagline">Transformando a odontologia por meio da estética, da reabilitação oral e da saúde integrativa, unindo ciência, bem-estar e cuidado centrado no ser humano.</p>
-          <p class="ideal-bio">Com mais de 20 anos dedicados à saúde, construiu uma trajetória marcada pela atuação clínica, acadêmica e empreendedora. Cirurgiã-dentista, professora e empresária, iniciou sua carreira na Prótese Dentária, atuando posteriormente como docente e coordenadora de curso técnico na área. Possui formação complementar em Prótese sobre Implantes, pós-graduação em Aromaterapia Clínica e é pós-graduanda em Saúde Integrativa. É criadora do método OdontoWellness®, fundadora da Clínica Be Angatu e diretora executiva do Projeto Delas por Elas, iniciativa voltada à reabilitação odontológica de mulheres em situação de vulnerabilidade. Sua atuação é pautada na integração entre ciência, prevenção, qualidade de vida e desenvolvimento humano, acreditando que a verdadeira transformação da saúde acontece quando o cuidado ultrapassa a doença e contempla o indivíduo de forma integral.</p>
+          <p class="ideal-tagline">Transformando a prática odontológica por meio da estética, da reabilitação oral e da saúde integrativa, unindo ciência, bem-estar e cuidado centrado no ser humano.</p>
+          <p class="ideal-bio">Com mais de 20 anos dedicados à saúde, construiu uma trajetória marcada pela atuação clínica, acadêmica e empreendedora. Cirurgiã-dentista, professora e empresária, iniciou sua carreira na Prótese Dentária, atuando posteriormente como docente e coordenadora de curso técnico na área. Possui formação complementar em Prótese sobre Implantes, pós-graduação em Aromaterapia Clínica e é pós-graduanda em Saúde Integrativa. É criadora do método OdontoWellness®, fundadora do Be Angatu e diretora executiva do Projeto Delas por Elas, iniciativa voltada à reabilitação odontológica de mulheres em situação de vulnerabilidade. Sua atuação é pautada na integração entre ciência, prevenção, qualidade de vida e desenvolvimento humano, acreditando que a verdadeira transformação da saúde acontece quando o cuidado ultrapassa a doença e contempla o indivíduo de forma integral.</p>
         </div>
       </article>
       <article class="ideal-row reveal">
@@ -418,45 +398,104 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     </div>
   </div>
 </section>
-<!-- ===================== APOIADORES ===================== -->
+<!-- ===================== PARCEIROS E APOIADORES ===================== -->
 <section class="sec bg-cream">
   <div class="wrap">
     <div class="head head--center reveal">
-      <span class="eyebrow">Quem constrói o Congressis</span>
-      <h2>Apoiadores</h2>
+      <span class="eyebrow">Parceiros e Apoiadores</span>
+      <h2>Quem faz o Congressis acontecer</h2>
     </div>
     <div class="support">
-      <?php foreach ($_sponsor_labels as $_cat_key => $_cat_label):
-        $is_apoio = $_cat_key === 'apoio';
-        if (empty($sponsors_by_cat[$_cat_key]) && !$is_apoio) continue; ?>
+
+      <!-- Bloco 1 — Apoio Institucional (destaque) -->
+      <div class="support-group support-group--inst reveal">
+        <div class="gh gh--center"><h3>Apoio Institucional</h3><span class="ln"></span></div>
+        <div class="logo-grid logo-grid--center">
+          <div class="logo-slot logo-slot--lg">
+            <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco 2 — Apoiadores -->
       <div class="support-group reveal">
-        <div class="gh"><h3><?= htmlspecialchars($_cat_label) ?></h3><span class="ln"></span></div>
+        <div class="gh"><h3>Apoiadores</h3><span class="ln"></span></div>
         <div class="logo-grid">
-          <?php if ($is_apoio): ?>
           <div class="logo-slot">
             <img src="assets/logos/logo-cro-rj.png" alt="CRO-RJ – Conselho Regional de Odontologia do Rio de Janeiro" loading="lazy">
           </div>
-          <?php endif; ?>
-          <?php foreach ($sponsors_by_cat[$_cat_key] ?? [] as $_s): ?>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-15-06-2026/PHOTO-2026-06-13-10-46-39.jpg.jpeg" alt="ABO – Rio de Janeiro" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-15-06-2026/PHOTO-2026-06-13-10-42-10.jpg.jpeg" alt="ABO – Região dos Lagos" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-15-06-2026/logo-redesfito-vertical (1) (2).png" alt="Rede Fitos" loading="lazy">
+          </div>
+          <?php foreach ($sponsors_by_cat['apoio'] ?? [] as $_s): ?>
           <div class="logo-slot">
             <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
-            <img src="<?= htmlspecialchars($_s['logo_path']) ?>"
-                 alt="<?= htmlspecialchars($_s['name']) ?>"
-                 loading="lazy">
+            <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
             <?php if ($_s['url']): ?></a><?php endif; ?>
           </div>
           <?php endforeach; ?>
         </div>
       </div>
-      <?php endforeach; ?>
+
+      <!-- Bloco 3 — Parceiros (aguardando logos) -->
+      <?php if (!empty($sponsors_by_cat['parceiros'])): ?>
       <div class="support-group reveal">
-        <div class="gh"><h3>Apoio Institucional</h3><span class="ln"></span></div>
+        <div class="gh"><h3>Parceiros</h3><span class="ln"></span></div>
         <div class="logo-grid">
+          <?php foreach ($sponsors_by_cat['parceiros'] as $_s): ?>
           <div class="logo-slot">
-            <img src="assets/logos/SEBRAE-nacional-preto.png" alt="Sebrae – Apoio Institucional" loading="lazy">
+            <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
+            <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
+            <?php if ($_s['url']): ?></a><?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
+      <!-- Bloco 4 — Patrocinadores e Expositores -->
+      <div class="support-group reveal">
+        <div class="gh"><h3>Patrocinadores e Expositores</h3><span class="ln"></span></div>
+        <div class="support-subgrid">
+          <div class="support-sub">
+            <span class="support-sub-label">Patrocínio</span>
+            <div class="logo-grid">
+              <div class="logo-slot">
+                <img src="assets/logos/logos-15-06-2026/IMG_7424 (1).png" alt="Cronotherapy" loading="lazy">
+              </div>
+              <?php foreach ($sponsors_by_cat['patrocinio'] ?? [] as $_s): ?>
+              <div class="logo-slot">
+                <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
+                <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
+                <?php if ($_s['url']): ?></a><?php endif; ?>
+              </div>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <div class="support-sub">
+            <span class="support-sub-label">Expositores</span>
+            <div class="logo-grid">
+              <div class="logo-slot">
+                <img src="assets/logos/logos-15-06-2026/Logo Preto PNG.png" alt="Priscila Tissi" loading="lazy">
+              </div>
+              <?php foreach ($sponsors_by_cat['expositores'] ?? [] as $_s): ?>
+              <div class="logo-slot">
+                <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
+                <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
+                <?php if ($_s['url']): ?></a><?php endif; ?>
+              </div>
+              <?php endforeach; ?>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
