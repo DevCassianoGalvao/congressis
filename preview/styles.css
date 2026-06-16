@@ -359,7 +359,7 @@ section{position:relative}
 /* ============================================================
    DIFERENCIAIS
    ============================================================ */
-.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:3.5rem}
+.dif-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;margin-top:3.5rem}
 .dif{padding:2rem 1.8rem;border-radius:var(--r);background:var(--cream-2);border:1px solid var(--line-soft);transition:.35s var(--ease)}
 .dif:hover{border-color:rgba(184,137,59,.4);box-shadow:0 20px 44px -28px rgba(19,37,27,.3)}
 .dif-num{font-family:var(--serif);font-size:1.1rem;color:var(--gold);font-weight:700;letter-spacing:.05em}
