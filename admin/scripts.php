@@ -73,14 +73,14 @@ include __DIR__ . '/includes/header.php';
     <p style="font-size:.9rem;color:var(--ink-soft)">
       Os scripts são injetados na landing page via PHP include. Salve e recarregue o site para ver o efeito.
     </p>
-    <a href="/" target="_blank" class="btn btn-outline btn-sm">
+    <a href="<?= admin_url('/') ?>" target="_blank" class="btn btn-outline btn-sm">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Ver site
     </a>
   </div>
 </div>
 
-<form method="POST" action="/admin/scripts.php">
+<form method="POST" action="<?= admin_url('/admin/scripts.php') ?>">
   <?= csrf_field() ?>
   <div class="scripts-grid">
 

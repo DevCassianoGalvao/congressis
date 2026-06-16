@@ -25,8 +25,10 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<?php define('SCRIPT_LOC','head'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
 </head>
 <body>
+<?php define('SCRIPT_LOC','body_start'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
 
 <!-- ===================== HEADER ===================== -->
 <header class="hd" id="hd">
@@ -418,12 +420,12 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       </div>
       <?php endif; ?>
 
-      <!-- Bloco 4 — Parceiros -->
-      <?php if (!empty($sponsors_by_cat['parceiros'])): ?>
+      <!-- Bloco 4 — Expositores -->
+      <?php if (!empty($sponsors_by_cat['expositores'])): ?>
       <div class="support-group reveal">
-        <div class="gh"><h3>Parceiros</h3><span class="ln"></span></div>
+        <div class="gh"><h3>Expositores</h3><span class="ln"></span></div>
         <div class="logo-grid">
-          <?php foreach ($sponsors_by_cat['parceiros'] as $_s): ?>
+          <?php foreach ($sponsors_by_cat['expositores'] as $_s): ?>
           <div class="logo-slot">
             <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
             <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
@@ -434,12 +436,12 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       </div>
       <?php endif; ?>
 
-      <!-- Bloco 5 — Expositores -->
-      <?php if (!empty($sponsors_by_cat['expositores'])): ?>
+      <!-- Bloco 5 — Parceiros -->
+      <?php if (!empty($sponsors_by_cat['parceiros'])): ?>
       <div class="support-group reveal">
-        <div class="gh"><h3>Expositores</h3><span class="ln"></span></div>
+        <div class="gh"><h3>Parceiros</h3><span class="ln"></span></div>
         <div class="logo-grid">
-          <?php foreach ($sponsors_by_cat['expositores'] as $_s): ?>
+          <?php foreach ($sponsors_by_cat['parceiros'] as $_s): ?>
           <div class="logo-slot">
             <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
             <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
@@ -609,6 +611,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 </template>
 
 <script src="script.js"></script>
+<?php define('SCRIPT_LOC','footer'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
 <button id="backTop" class="back-top" aria-label="Voltar ao topo">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
