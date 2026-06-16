@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - /bin/mkdir -p uploads/sponsors
+    - /bin/mkdir -p uploads/speakers
+    - /bin/mkdir -p logs
