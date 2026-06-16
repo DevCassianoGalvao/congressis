@@ -336,7 +336,7 @@ h2{color:#13251B;font-size:1.1rem;margin-bottom:.5rem}
     <div class="section">
       <h2>Domínio</h2>
       <label>URL do site (sem barra final)</label>
-      <input type="text" name="app_domain" value="<?= htmlspecialchars($_POST['app_domain'] ?? '') ?>" placeholder="https://congressis.com.br">
+      <input type="text" name="app_domain" value="<?= htmlspecialchars($_POST['app_domain'] ?? 'https://congressis.com.br') ?>" placeholder="https://congressis.com.br">
     </div>
 
     <div class="section">

@@ -6,7 +6,7 @@ define('DB_HOST',         'localhost');
 define('DB_NAME',         'nome_do_banco');
 define('DB_USER',         'usuario_mysql');
 define('DB_PASS',         'senha_mysql');
-define('APP_DOMAIN',      'https://seudominio.com.br'); // sem barra final
+define('APP_DOMAIN',      'https://congressis.com.br'); // sem barra final
 define('SESSION_TIMEOUT', 7200); // 2 horas em segundos
 
 // Brevo — notificação de leads por e-mail (opcional)

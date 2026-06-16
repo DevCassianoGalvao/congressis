@@ -16,7 +16,7 @@
 
 ## Instalação via install.php
 
-- [ ] Acessar `https://seudominio.com/install.php` no browser
+- [ ] Acessar `https://congressis.com.br/install.php` no browser
 - [ ] Verificar que todos os requisitos aparecem como ✓
   - PHP >= 8.0, PDO, PDO_MySQL, JSON, GD, fileinfo
   - Pastas config/, logs/, uploads/ graváveis
@@ -31,7 +31,7 @@
 - [ ] Verificar que `install.php` foi deletado (se ainda existir, deletar manualmente)
 - [ ] Confirmar que `config/config.php` retorna 403 ao acessar via browser
 - [ ] Confirmar que `logs/` retorna 403 ao acessar via browser
-- [ ] Testar login: `https://seudominio.com/admin/`
+- [ ] Testar login: `https://congressis.com.br/admin/`
 - [ ] Testar envio do formulário da LP — lead deve aparecer no painel
 - [ ] Testar botão "Chamar no WhatsApp" — deve gerar `https://wa.me/55{telefone}`
 - [ ] Testar exportação de CSV
