@@ -445,12 +445,26 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         </div>
       </div>
 
-      <!-- Bloco 3 — Parceiros (aguardando logos) -->
-      <?php if (!empty($sponsors_by_cat['parceiros'])): ?>
+      <!-- Bloco 3 — Parceiros -->
       <div class="support-group reveal">
         <div class="gh"><h3>Parceiros</h3><span class="ln"></span></div>
         <div class="logo-grid">
-          <?php foreach ($sponsors_by_cat['parceiros'] as $_s): ?>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/logo-suelen.png" alt="Suelen" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/aretuza.png" alt="Aretuza Lattanzi" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/be-angatu.png" alt="Be Angatu" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/delas-por-elas.jpeg" alt="Delas por Elas" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/efc-logo.png" alt="É Forte Cast" loading="lazy">
+          </div>
+          <?php foreach ($sponsors_by_cat['parceiros'] ?? [] as $_s): ?>
           <div class="logo-slot">
             <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
             <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
@@ -459,7 +473,6 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
           <?php endforeach; ?>
         </div>
       </div>
-      <?php endif; ?>
 
       <!-- Bloco 4 — Patrocinadores e Expositores -->
       <div class="support-group reveal">
@@ -470,6 +483,9 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
             <div class="logo-grid">
               <div class="logo-slot">
                 <img src="assets/logos/logos-15-06-2026/cronotherapy-photoroom.png" alt="Cronotherapy" loading="lazy">
+              </div>
+              <div class="logo-slot">
+                <img src="assets/logos/logos-16-06-2026/logo-upy.png" alt="Upy" loading="lazy">
               </div>
               <?php foreach ($sponsors_by_cat['patrocinio'] ?? [] as $_s): ?>
               <div class="logo-slot">
@@ -485,6 +501,12 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
             <div class="logo-grid">
               <div class="logo-slot">
                 <img src="assets/logos/logos-15-06-2026/Logo Preto PNG.png" alt="Priscila Tissi" loading="lazy">
+              </div>
+              <div class="logo-slot">
+                <img src="assets/logos/logos-16-06-2026/cogumelos-da-floresta.png" alt="Cogumelos da Floresta" loading="lazy">
+              </div>
+              <div class="logo-slot">
+                <img src="assets/logos/logos-16-06-2026/stephani-campos.png" alt="Stephani Campos" loading="lazy">
               </div>
               <?php foreach ($sponsors_by_cat['expositores'] ?? [] as $_s): ?>
               <div class="logo-slot">
