@@ -10,7 +10,7 @@ $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
 $UPLOAD_DIR      = __DIR__ . '/../uploads/sponsors/';
-$UPLOAD_URL_BASE = '/uploads/sponsors/';
+$UPLOAD_URL_BASE = 'uploads/sponsors/';
 
 $categories = [
     'parceiros'   => 'Parceiros',
@@ -132,7 +132,7 @@ include __DIR__ . '/includes/header.php';
 <!-- Tabs de categorias -->
 <div class="sponsors-tabs">
   <?php foreach ($categories as $key => $label): ?>
-    <a href="/admin/sponsors.php?cat=<?= urlencode($key) ?>"
+    <a href="<?= admin_url('/admin/sponsors.php?cat=') . urlencode($key) ?>"
        class="sponsors-tab <?= $active_cat === $key ? 'active' : '' ?>">
       <?= e($label) ?>
       <span class="sponsors-tab-count"><?= count($sponsors_by_cat[$key]) ?></span>
@@ -157,7 +157,7 @@ include __DIR__ . '/includes/header.php';
       <?php foreach ($sponsors_by_cat[$key] as $s): ?>
         <div class="sponsor-row">
           <div class="sponsor-thumb">
-            <img src="<?= e($s['logo_path']) ?>" alt="<?= e($s['name']) ?>">
+            <img src="<?= e(admin_url('/' . ltrim($s['logo_path'], '/'))) ?>" alt="<?= e($s['name']) ?>">
           </div>
           <div class="sponsor-info">
             <span class="sponsor-name"><?= e($s['name']) ?></span>

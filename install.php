@@ -97,6 +97,19 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
   PRIMARY KEY (`id`),
   KEY `idx_category_order` (`category`, `sort_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `speakers` (
+  `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name`       VARCHAR(150) NOT NULL,
+  `subtitle`   VARCHAR(255) NOT NULL DEFAULT '',
+  `quote`      TEXT,
+  `photo_path` VARCHAR(255) NOT NULL DEFAULT '',
+  `sort_order` INT          NOT NULL DEFAULT 0,
+  `active`     TINYINT(1)   NOT NULL DEFAULT 1,
+  `created_at` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_sort_order` (`sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ";
 
 // ── Processar formulário ──
@@ -180,23 +193,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $all_ok) {
                 . "ini_set('log_errors', 1);" . PHP_EOL
                 . "ini_set('error_log', __DIR__ . '/../logs/php_errors.log');" . PHP_EOL;
 
-            // Criar pasta de uploads de sponsors
-            $uploads_dir = __DIR__ . '/uploads/sponsors';
-            if (!is_dir($uploads_dir)) {
-                mkdir($uploads_dir, 0755, true);
-            }
-            $uploads_htaccess = $uploads_dir . '/.htaccess';
-            if (!file_exists($uploads_htaccess)) {
-                file_put_contents($uploads_htaccess,
-                    "<FilesMatch \"\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$\">\n"
-                    . "    Order allow,deny\n"
-                    . "    Deny from all\n"
-                    . "</FilesMatch>\n"
-                    . "Options -Indexes\n"
-                    . "<IfModule mod_headers.c>\n"
-                    . "    Header set X-Content-Type-Options nosniff\n"
-                    . "</IfModule>\n"
-                );
+            // Criar pastas de uploads e proteger com .htaccess
+            $htaccess_content =
+                "<FilesMatch \"\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$\">\n"
+                . "    Order allow,deny\n"
+                . "    Deny from all\n"
+                . "</FilesMatch>\n"
+                . "Options -Indexes\n"
+                . "<IfModule mod_headers.c>\n"
+                . "    Header set X-Content-Type-Options nosniff\n"
+                . "</IfModule>\n";
+
+            foreach (['uploads/sponsors', 'uploads/speakers'] as $dir) {
+                $full = __DIR__ . '/' . $dir;
+                if (!is_dir($full)) mkdir($full, 0755, true);
+                if (!file_exists($full . '/.htaccess')) {
+                    file_put_contents($full . '/.htaccess', $htaccess_content);
+                }
             }
 
             if (!file_put_contents($config_path, $config_content)) {

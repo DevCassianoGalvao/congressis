@@ -1,0 +1,13 @@
+# Impedir execução de PHP e scripts na pasta de uploads — CRÍTICO
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Impedir listagem do diretório
+Options -Indexes
+
+# Forçar X-Content-Type-Options para todos os arquivos
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options nosniff
+</IfModule>

@@ -9,7 +9,7 @@ if (!is_authenticated()) {
     http_response_code(403);
     // Se for formulário POST (não AJAX), redirecionar
     if ($_SERVER['CONTENT_TYPE'] !== 'application/json') {
-        header('Location: /admin/login.php');
+        header('Location: ' . admin_url('/admin/login.php'));
     } else {
         header('Content-Type: application/json');
         echo json_encode(['error' => 'Não autenticado.']);
@@ -61,5 +61,5 @@ try {
 }
 
 // Sempre redireciona de volta para leads após DELETE via form
-header('Location: /admin/leads.php');
+header('Location: ' . admin_url('/admin/leads.php'));
 exit;

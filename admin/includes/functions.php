@@ -233,11 +233,15 @@ function validate_and_save_sponsor_logo(array $file, string $upload_dir): array 
             @unlink($dest);
             return [false, 'Imagem corrompida ou inválida.', null];
         }
-        $saved = match ($ext) {
-            'png'  => imagepng($img,  $dest, 9),
-            'webp' => imagewebp($img, $dest, 90),
-            default => imagejpeg($img, $dest, 90),
-        };
+        if ($ext === 'png') {
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+            $saved = imagepng($img, $dest, 9);
+        } elseif ($ext === 'webp') {
+            $saved = imagewebp($img, $dest, 90);
+        } else {
+            $saved = imagejpeg($img, $dest, 90);
+        }
         imagedestroy($img);
         if (!$saved) {
             @unlink($dest);

@@ -80,7 +80,7 @@ include __DIR__ . '/includes/header.php';
 </div>
 
 <!-- Toolbar -->
-<form method="GET" action="/admin/leads.php" class="toolbar">
+<form method="GET" action="<?= admin_url('/admin/leads.php') ?>" class="toolbar">
   <input type="text" name="q" placeholder="Buscar por nome ou e-mail…"
          value="<?= e($search) ?>" style="flex:1;min-width:200px;">
   <select name="status">
@@ -89,8 +89,8 @@ include __DIR__ . '/includes/header.php';
     <option value="comprou" <?= $status === 'comprou' ? 'selected' : '' ?>>Comprou</option>
   </select>
   <button type="submit" class="btn btn-primary">Filtrar</button>
-  <a href="/admin/leads.php" class="btn btn-outline">Limpar</a>
-  <a href="/admin/export.php?<?= http_build_query(['q' => $search, 'status' => $status]) ?>"
+  <a href="<?= admin_url('/admin/leads.php') ?>" class="btn btn-outline">Limpar</a>
+  <a href="<?= admin_url('/admin/export.php?') . http_build_query(['q' => $search, 'status' => $status]) ?>"
      class="btn btn-gold">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Exportar CSV
@@ -189,7 +189,7 @@ include __DIR__ . '/includes/header.php';
     if ($i === $pg['current']): ?>
       <span class="current"><?= $i ?></span>
     <?php else: ?>
-      <a href="/admin/leads.php?<?= $base_qs ?>&page=<?= $i ?>"><?= $i ?></a>
+      <a href="<?= admin_url('/admin/leads.php?') . $base_qs ?>&page=<?= $i ?>"><?= $i ?></a>
     <?php endif;
   endfor; ?>
 </div>
@@ -199,7 +199,7 @@ include __DIR__ . '/includes/header.php';
 <dialog id="deleteDialog">
   <div class="dialog-title">Excluir lead</div>
   <div class="dialog-body">Tem certeza que deseja excluir este lead? Esta ação não pode ser desfeita.</div>
-  <form id="deleteForm" method="POST" action="/api/delete-lead.php">
+  <form id="deleteForm" method="POST" action="<?= admin_url('/api/delete-lead.php') ?>">
     <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
     <input type="hidden" name="id" id="deleteLeadId" value="">
     <div class="dialog-actions">

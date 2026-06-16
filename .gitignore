@@ -2,3 +2,9 @@
 config/config.php
 logs/admin.log
 logs/php_errors.log
+
+# Arquivos enviados via upload (produção) — não commitar
+uploads/sponsors/*
+uploads/speakers/*
+!uploads/sponsors/.htaccess
+!uploads/speakers/.htaccess

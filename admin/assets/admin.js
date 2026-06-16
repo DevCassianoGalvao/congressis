@@ -56,7 +56,7 @@
       const csrf   = btn.dataset.csrf;
       const next   = status === 'lead' ? 'comprou' : 'lead';
 
-      fetch('/admin/toggle-status.php', {
+      fetch((window._BP||'') + '/admin/toggle-status.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: id, status: next, csrf_token: csrf })

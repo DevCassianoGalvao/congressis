@@ -13,6 +13,7 @@ $bp = defined('BASE_PATH') ? BASE_PATH : '';
 <title><?= e($page_title) ?> — Congressis Admin</title>
 <link rel="icon" type="image/png" href="<?= $bp ?>/assets/favicon-emblem.png">
 <link rel="stylesheet" href="<?= $bp ?>/admin/assets/admin.css">
+<script>var _BP=<?= json_encode($bp) ?>;</script>
 </head>
 <body>
 
@@ -33,6 +34,12 @@ $bp = defined('BASE_PATH') ? BASE_PATH : '';
         <a href="<?= $bp ?>/admin/scripts.php">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Scripts
+        </a>
+      </li>
+      <li class="<?= $current_page === 'speakers' ? 'active' : '' ?>">
+        <a href="<?= $bp ?>/admin/speakers.php">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+          Palestrantes
         </a>
       </li>
       <li class="<?= $current_page === 'sponsors' ? 'active' : '' ?>">
