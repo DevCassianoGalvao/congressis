@@ -46,6 +46,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     exit;
 }
 
+// ── EDITAR URL ────────────────────────────────────────────────
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_url') {
+    if (!verify_csrf($_POST['csrf_token'] ?? '')) {
+        $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Token CSRF inválido.'];
+        header('Location: /admin/sponsors.php');
+        exit;
+    }
+    $id  = (int)($_POST['id'] ?? 0);
+    $url = trim($_POST['url'] ?? '');
+    if ($id > 0) {
+        $pdo->prepare('UPDATE sponsors SET url = ? WHERE id = ?')
+            ->execute([$url ?: null, $id]);
+        write_log('URL do sponsor #' . $id . ' atualizada por ' . get_current_user_name());
+        $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Link atualizado com sucesso.'];
+    }
+    $cat = $_POST['cat'] ?? 'parceiros';
+    header('Location: /admin/sponsors.php?cat=' . urlencode($cat));
+    exit;
+}
+
 // ── UPLOAD logo ───────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'upload') {
     $upload_error = null;
@@ -144,11 +164,20 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="sponsor-info">
             <span class="sponsor-name"><?= e($s['name']) ?></span>
-            <?php if ($s['url']): ?>
-              <a href="<?= e($s['url']) ?>" target="_blank" rel="noopener" class="sponsor-url"><?= e($s['url']) ?></a>
-            <?php else: ?>
-              <span class="sponsor-url" style="color:var(--ink-soft)">Sem URL</span>
-            <?php endif; ?>
+            <form method="POST" action="/admin/sponsors.php?cat=<?= urlencode($key) ?>"
+                  style="display:flex;align-items:center;gap:.4rem;margin:0;flex:1">
+              <?= csrf_field() ?>
+              <input type="hidden" name="action" value="update_url">
+              <input type="hidden" name="id"  value="<?= (int)$s['id'] ?>">
+              <input type="hidden" name="cat" value="<?= e($key) ?>">
+              <input type="url" name="url" value="<?= e($s['url'] ?? '') ?>"
+                     class="form-control" placeholder="https://empresa.com.br"
+                     style="font-size:.82rem;padding:.3rem .6rem;min-width:220px">
+              <button type="submit" class="btn btn-sm btn-primary" title="Salvar link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
+                Salvar
+              </button>
+            </form>
           </div>
           <span class="sponsor-order">ordem <?= (int)$s['sort_order'] ?></span>
           <form method="POST" action="/admin/sponsors.php"
