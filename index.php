@@ -445,7 +445,27 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         </div>
       </div>
 
-      <!-- Bloco 3 — Parceiros -->
+      <!-- Bloco 3 — Patrocinadores -->
+      <div class="support-group reveal">
+        <div class="gh"><h3>Patrocinadores</h3><span class="ln"></span></div>
+        <div class="logo-grid">
+          <div class="logo-slot">
+            <img src="assets/logos/logos-15-06-2026/cronotherapy-photoroom.png" alt="Cronotherapy" loading="lazy">
+          </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/logo-upy.png" alt="Upy" loading="lazy">
+          </div>
+          <?php foreach ($sponsors_by_cat['patrocinio'] ?? [] as $_s): ?>
+          <div class="logo-slot">
+            <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
+            <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
+            <?php if ($_s['url']): ?></a><?php endif; ?>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <!-- Bloco 4 — Parceiros -->
       <div class="support-group reveal">
         <div class="gh"><h3>Parceiros</h3><span class="ln"></span></div>
         <div class="logo-grid">
@@ -474,49 +494,26 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         </div>
       </div>
 
-      <!-- Bloco 4 — Patrocinadores e Expositores -->
+      <!-- Bloco 5 — Expositores -->
       <div class="support-group reveal">
-        <div class="gh"><h3>Patrocinadores e Expositores</h3><span class="ln"></span></div>
-        <div class="support-subgrid">
-          <div class="support-sub">
-            <span class="support-sub-label">Patrocínio</span>
-            <div class="logo-grid">
-              <div class="logo-slot">
-                <img src="assets/logos/logos-15-06-2026/cronotherapy-photoroom.png" alt="Cronotherapy" loading="lazy">
-              </div>
-              <div class="logo-slot">
-                <img src="assets/logos/logos-16-06-2026/logo-upy.png" alt="Upy" loading="lazy">
-              </div>
-              <?php foreach ($sponsors_by_cat['patrocinio'] ?? [] as $_s): ?>
-              <div class="logo-slot">
-                <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
-                <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
-                <?php if ($_s['url']): ?></a><?php endif; ?>
-              </div>
-              <?php endforeach; ?>
-            </div>
+        <div class="gh"><h3>Expositores</h3><span class="ln"></span></div>
+        <div class="logo-grid">
+          <div class="logo-slot">
+            <img src="assets/logos/logos-15-06-2026/Logo Preto PNG.png" alt="Priscila Tissi" loading="lazy">
           </div>
-          <div class="support-sub">
-            <span class="support-sub-label">Expositores</span>
-            <div class="logo-grid">
-              <div class="logo-slot">
-                <img src="assets/logos/logos-15-06-2026/Logo Preto PNG.png" alt="Priscila Tissi" loading="lazy">
-              </div>
-              <div class="logo-slot">
-                <img src="assets/logos/logos-16-06-2026/cogumelos-da-floresta.png" alt="Cogumelos da Floresta" loading="lazy">
-              </div>
-              <div class="logo-slot">
-                <img src="assets/logos/logos-16-06-2026/stephani-campos.png" alt="Stephani Campos" loading="lazy">
-              </div>
-              <?php foreach ($sponsors_by_cat['expositores'] ?? [] as $_s): ?>
-              <div class="logo-slot">
-                <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
-                <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
-                <?php if ($_s['url']): ?></a><?php endif; ?>
-              </div>
-              <?php endforeach; ?>
-            </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/cogumelos-da-floresta.png" alt="Cogumelos da Floresta" loading="lazy">
           </div>
+          <div class="logo-slot">
+            <img src="assets/logos/logos-16-06-2026/stephani-campos.png" alt="Stephani Campos" loading="lazy">
+          </div>
+          <?php foreach ($sponsors_by_cat['expositores'] ?? [] as $_s): ?>
+          <div class="logo-slot">
+            <?php if ($_s['url']): ?><a href="<?= htmlspecialchars($_s['url']) ?>" target="_blank" rel="noopener noreferrer"><?php endif; ?>
+            <img src="<?= htmlspecialchars($_s['logo_path']) ?>" alt="<?= htmlspecialchars($_s['name']) ?>" loading="lazy">
+            <?php if ($_s['url']): ?></a><?php endif; ?>
+          </div>
+          <?php endforeach; ?>
         </div>
       </div>
 
