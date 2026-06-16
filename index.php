@@ -2,11 +2,14 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/admin/includes/db.php';
 require_once __DIR__ . '/includes/get-sponsors.php';
+require_once __DIR__ . '/includes/get-speakers.php';
 try {
     $pdo = get_db();
     $sponsors_by_cat = get_sponsors_by_category($pdo);
+    $speakers = get_speakers($pdo);
 } catch (Throwable $e) {
     $sponsors_by_cat = [];
+    $speakers = [];
 }
 $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'=>'Apoio','expositores'=>'Expositores'];
 ?>
@@ -214,64 +217,28 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       <span class="di"><b>9h</b><span>Credenciamento</span></span>
       <span class="di"><b>9h30</b><span>Abertura oficial</span></span>
       <span class="di"><b>17h</b><span>Encerramento</span></span>
-      <span class="note">ordem e horários das palestras em breve</span>
+      <span class="note">Ordem e horários das palestras em breve</span>
     </div>
 
     <div class="speakers">
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/flavia.jpeg" alt="Flávia Karina"></div>
-        </div>
-        <h3>Flávia Karina</h3>
-        <p class="cred">Especialista em Periodontia · Odontologia Integrativa e Biológica · Formação em Ozonioterapia · Gestão Estratégica de Consultórios</p>
-        <p class="talk">Da odontologia convencional à clínica integrativa: como aumentar autoridade, diferenciação e faturamento.</p>
-      </article>
-
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/jean.jpeg" alt="Jean Baptiste Bonillo-Tomazelli"></div>
-          <span class="sp-flag" title="França"><i class="b"></i><i class="w"></i><i class="r"></i></span>
-        </div>
-        <h3>Jean Baptiste Bonillo-Tomazelli</h3>
-        <p class="cred">Professor e terapeuta Floral de Bach pela Escola de Bach (Inglaterra)</p>
-        <p class="talk">TDAH e Saúde Emocional: a contribuição dos Florais de Bach no acompanhamento das pessoas com TDAH e de suas famílias.</p>
-      </article>
-
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/suellen.png" alt="Suellen Benvênuti"></div>
-        </div>
-        <h3>Suellen Benvênuti</h3>
-        <p class="cred">Mestra em Reiki, Terapeuta Vibracional e especialista em Desenvolvimento Humano</p>
-        <p class="talk">Reiki na Saúde Integrativa: da evidência científica à humanização do cuidado.</p>
-      </article>
-
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/andrea.jpeg" alt="Andréa Pirazzo"></div>
-        </div>
-        <h3>Andréa Pirazzo</h3>
-        <p class="cred">Especialista em Harmonização Orofacial · Pós em Saúde Integrativa / Odonto Biológica · Especialista em Biofísica · Terapias Bioenergéticas e Biorressonância</p>
-        <p class="talk">Odontologia e estética sob a ótica da saúde integrativa.</p>
-      </article>
-
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/gabriela-fernanda.png" alt="Gabriela Borba e Fernanda Borba"></div>
-        </div>
-        <h3>Gabriela e Fernanda Borba</h3>
-        <p class="cred">Fisioterapeuta Dermatofuncional · Esteticista e Empresária</p>
-        <p class="talk">Ozonioterapia na Estética Moderna: longevidade e saúde.</p>
-      </article>
-
-      <article class="speaker reveal">
-        <div class="sp-photo">
-          <div class="circle"><img src="assets/speakers/danielle.jpeg" alt="Danielle Murta"></div>
-        </div>
-        <h3>Danielle Murta</h3>
-        <p class="cred">Cirurgiã-dentista. Ortodontia, Odontologia Hospitalar e Laserterapia</p>
-        <p class="talk">Laserterapia na Odontologia: modulando inflamação, dor e regeneração para uma saúde além da cavidade oral.</p>
-      </article>
+      <?php if (!empty($speakers)): ?>
+        <?php foreach ($speakers as $_sp): ?>
+        <article class="speaker reveal">
+          <div class="sp-photo">
+            <div class="circle"><img src="<?= htmlspecialchars($_sp['photo_path']) ?>" alt="<?= htmlspecialchars($_sp['name']) ?>"></div>
+          </div>
+          <h3><?= htmlspecialchars($_sp['name']) ?></h3>
+          <?php if (!empty($_sp['subtitle'])): ?>
+          <p class="cred"><?= htmlspecialchars($_sp['subtitle']) ?></p>
+          <?php endif; ?>
+          <?php if (!empty($_sp['quote'])): ?>
+          <p class="talk"><?= htmlspecialchars($_sp['quote']) ?></p>
+          <?php endif; ?>
+        </article>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <p class="lead" style="text-align:center;color:var(--ink-soft);grid-column:1/-1;padding:2rem 0">Palestrantes em breve.</p>
+      <?php endif; ?>
     </div>
   </div>
 </section>

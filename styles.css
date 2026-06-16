@@ -655,7 +655,8 @@ section{position:relative}
   .viver-grid{grid-template-columns:1fr}
   .speakers{grid-template-columns:1fr;gap:3rem}
   .dif-grid{grid-template-columns:1fr}
-  .day-band .note{margin-left:0;width:100%}
+  .day-band{justify-content:center;text-align:center}
+  .day-band .note{margin-left:0;width:100%;text-align:center}
   .ft-grid{grid-template-columns:1fr}
   .ft-brand{grid-column:auto}
   .ft-bottom{flex-direction:column;align-items:flex-start}
