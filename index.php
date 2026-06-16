@@ -237,6 +237,9 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         <article class="speaker reveal">
           <div class="sp-photo">
             <div class="circle"><img src="<?= htmlspecialchars($_sp['photo_path']) ?>" alt="<?= htmlspecialchars($_sp['name']) ?>"></div>
+            <?php if (!empty($_sp['flag']) && $_sp['flag'] === 'fr'): ?>
+            <span class="sp-flag" title="França"><i class="b"></i><i class="w"></i><i class="r"></i></span>
+            <?php endif; ?>
           </div>
           <h3><?= htmlspecialchars($_sp['name']) ?></h3>
           <?php if (!empty($_sp['subtitle'])): ?>

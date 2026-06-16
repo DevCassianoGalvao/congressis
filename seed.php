@@ -16,6 +16,13 @@ try {
     die('Erro ao conectar: ' . $e->getMessage());
 }
 
+// ── Adiciona coluna flag se não existir (migração idempotente) ──
+$col = $pdo->query("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'speakers' AND COLUMN_NAME = 'flag'")->fetchColumn();
+if (!$col) {
+    $pdo->exec("ALTER TABLE speakers ADD COLUMN `flag` VARCHAR(5) DEFAULT NULL AFTER photo_path");
+}
+
 // ── Limpa e reinsere para garantir idempotência ──
 $pdo->exec("DELETE FROM sponsors");
 $pdo->exec("DELETE FROM speakers");
@@ -58,42 +65,42 @@ $speakers = [
         'Flávia Karina',
         'Especialista em Periodontia · Odontologia Integrativa e Biológica · Formação em Ozonioterapia · Gestão Estratégica de Consultórios',
         'Da odontologia convencional à clínica integrativa: como aumentar autoridade, diferenciação e faturamento.',
-        'assets/speakers/flavia.jpeg', 10,
+        'assets/speakers/flavia.jpeg', null, 10,
     ],
     [
         'Jean Baptiste Bonillo-Tomazelli',
         'Professor e terapeuta Floral de Bach pela Escola de Bach (Inglaterra)',
         'TDAH e Saúde Emocional: a contribuição dos Florais de Bach no acompanhamento das pessoas com TDAH e de suas famílias.',
-        'assets/speakers/jean.jpeg', 20,
+        'assets/speakers/jean.jpeg', 'fr', 20,
     ],
     [
         'Suellen Benvênuti',
         'Mestra em Reiki, Terapeuta Vibracional e especialista em Desenvolvimento Humano',
         'Reiki na Saúde Integrativa: da evidência científica à humanização do cuidado.',
-        'assets/speakers/suellen.png', 30,
+        'assets/speakers/suellen.png', null, 30,
     ],
     [
         'Andréa Pirazzo',
         'Especialista em Harmonização Orofacial · Pós em Saúde Integrativa / Odonto Biológica · Especialista em Biofísica · Terapias Bioenergéticas e Biorressonância',
         'Odontologia e estética sob a ótica da saúde integrativa.',
-        'assets/speakers/andrea.jpeg', 40,
+        'assets/speakers/andrea.jpeg', null, 40,
     ],
     [
         'Gabriela e Fernanda Borba',
         'Fisioterapeuta Dermatofuncional · Esteticista e Empresária',
         'Ozonioterapia na Estética Moderna: longevidade e saúde.',
-        'assets/speakers/gabriela-fernanda.png', 50,
+        'assets/speakers/gabriela-fernanda.png', null, 50,
     ],
     [
         'Danielle Murta',
         'Cirurgiã-dentista. Ortodontia, Odontologia Hospitalar e Laserterapia',
         'Laserterapia na Odontologia: modulando inflamação, dor e regeneração para uma saúde além da cavidade oral.',
-        'assets/speakers/danielle.jpeg', 60,
+        'assets/speakers/danielle.jpeg', null, 60,
     ],
 ];
 
 $stmtSp = $pdo->prepare(
-    'INSERT INTO speakers (name, subtitle, quote, photo_path, sort_order, active) VALUES (?,?,?,?,?,1)'
+    'INSERT INTO speakers (name, subtitle, quote, photo_path, flag, sort_order, active) VALUES (?,?,?,?,?,?,1)'
 );
 foreach ($speakers as $sp) {
     $stmtSp->execute($sp);

@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `speakers` (
   `subtitle`   VARCHAR(255) NOT NULL DEFAULT '',
   `quote`      TEXT,
   `photo_path` VARCHAR(255) NOT NULL DEFAULT '',
+  `flag`       VARCHAR(5)   DEFAULT NULL,
   `sort_order` INT          NOT NULL DEFAULT 0,
   `active`     TINYINT(1)   NOT NULL DEFAULT 1,
   `created_at` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
