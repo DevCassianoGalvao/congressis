@@ -3,6 +3,7 @@ require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/admin/includes/db.php';
 require_once __DIR__ . '/includes/get-sponsors.php';
 require_once __DIR__ . '/includes/get-speakers.php';
+require_once __DIR__ . '/admin/includes/get-scripts.php';
 try {
     $pdo = get_db();
     $sponsors_by_cat = get_sponsors_by_category($pdo);
@@ -25,10 +26,10 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<?php define('SCRIPT_LOC','head'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
+<?php if (isset($pdo)) inject_scripts($pdo, 'head'); ?>
 </head>
 <body>
-<?php define('SCRIPT_LOC','body_start'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
+<?php if (isset($pdo)) inject_scripts($pdo, 'body_start'); ?>
 
 <!-- ===================== HEADER ===================== -->
 <header class="hd" id="hd">
@@ -611,7 +612,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 </template>
 
 <script src="script.js"></script>
-<?php define('SCRIPT_LOC','footer'); include __DIR__.'/admin/includes/get-scripts.php'; ?>
+<?php if (isset($pdo)) inject_scripts($pdo, 'footer'); ?>
 <button id="backTop" class="back-top" aria-label="Voltar ao topo">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
