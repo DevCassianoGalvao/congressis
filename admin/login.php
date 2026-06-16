@@ -6,8 +6,7 @@ set_security_headers();
 
 // Já autenticado — redirecionar
 if (is_authenticated()) {
-    header('Location: /admin/leads.php');
-    exit;
+    admin_redirect('/admin/leads.php');
 }
 
 $error = '';
@@ -37,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['admin_username'] = $user['username'];
                     $_SESSION['last_activity']  = time();
                     reset_login_rate_limit();
-                    header('Location: /admin/leads.php');
-                    exit;
+                    admin_redirect('/admin/leads.php');
                 } else {
                     sleep(1); // Atrasar resposta de credencial inválida
                     $error = 'Usuário ou senha inválidos.';
@@ -57,20 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — Congressis Admin</title>
-<link rel="icon" type="image/png" href="/assets/favicon-emblem.png">
-<link rel="stylesheet" href="/admin/assets/admin.css">
+<?php $bp = defined('BASE_PATH') ? BASE_PATH : ''; ?>
+<link rel="icon" type="image/png" href="<?= $bp ?>/assets/favicon-emblem.png">
+<link rel="stylesheet" href="<?= $bp ?>/admin/assets/admin.css">
 </head>
 <body>
 <div class="login-wrap">
   <div class="login-card">
-    <img src="/assets/logos/logo-horizontal-verde.png" alt="Congressis" class="login-logo">
+    <img src="<?= $bp ?>/assets/logos/logo-horizontal-verde.png" alt="Congressis" class="login-logo">
     <h2>Painel Administrativo</h2>
 
     <?php if ($error): ?>
       <div class="alert alert-danger"><?= e($error) ?></div>
     <?php endif; ?>
 
-    <form method="POST" action="/admin/login.php" novalidate>
+    <form method="POST" action="<?= $bp ?>/admin/login.php" novalidate>
       <?= csrf_field() ?>
       <div class="form-group">
         <label for="username">Usuário</label>

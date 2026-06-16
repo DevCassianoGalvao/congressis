@@ -29,7 +29,8 @@ function is_authenticated(): bool {
 
 function require_auth(): void {
     if (!is_authenticated()) {
-        header('Location: /admin/login.php');
+        $base = defined('BASE_PATH') ? BASE_PATH : '';
+        header('Location: ' . $base . '/admin/login.php');
         exit;
     }
 }

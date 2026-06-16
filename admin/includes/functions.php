@@ -1,6 +1,16 @@
 <?php
 // Helpers gerais do painel
 
+function admin_url(string $path = ''): string {
+    $base = defined('BASE_PATH') ? BASE_PATH : '';
+    return $base . $path;
+}
+
+function admin_redirect(string $path): void {
+    header('Location: ' . admin_url($path));
+    exit;
+}
+
 function set_security_headers(): void {
     header('X-Content-Type-Options: nosniff');
     header('X-Frame-Options: DENY');

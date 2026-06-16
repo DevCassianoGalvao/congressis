@@ -23,8 +23,7 @@ $categories = [
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
     if (!verify_csrf($_POST['csrf_token'] ?? '')) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Token CSRF inválido.'];
-        header('Location: /admin/sponsors.php');
-        exit;
+        admin_redirect('/admin/sponsors.php');
     }
     $id = (int)($_POST['id'] ?? 0);
     if ($id > 0) {
@@ -42,16 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
             $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Logo removido com sucesso.'];
         }
     }
-    header('Location: /admin/sponsors.php');
-    exit;
+    admin_redirect('/admin/sponsors.php');
 }
 
 // ── EDITAR URL ────────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_url') {
     if (!verify_csrf($_POST['csrf_token'] ?? '')) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => 'Token CSRF inválido.'];
-        header('Location: /admin/sponsors.php');
-        exit;
+        admin_redirect('/admin/sponsors.php');
     }
     $id  = (int)($_POST['id'] ?? 0);
     $url = trim($_POST['url'] ?? '');
@@ -62,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
         $_SESSION['flash'] = ['type' => 'success', 'msg' => 'Link atualizado com sucesso.'];
     }
     $cat = $_POST['cat'] ?? 'parceiros';
-    header('Location: /admin/sponsors.php?cat=' . urlencode($cat));
+    admin_redirect('/admin/sponsors.php?cat=' . urlencode($cat));
     exit;
 }
 
@@ -105,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'uploa
     if ($upload_error) {
         $_SESSION['flash'] = ['type' => 'danger', 'msg' => $upload_error];
     }
-    header('Location: /admin/sponsors.php?cat=' . urlencode($category));
+    admin_redirect('/admin/sponsors.php?cat=' . urlencode($category));
     exit;
 }
 
@@ -164,7 +161,7 @@ include __DIR__ . '/includes/header.php';
           </div>
           <div class="sponsor-info">
             <span class="sponsor-name"><?= e($s['name']) ?></span>
-            <form method="POST" action="/admin/sponsors.php?cat=<?= urlencode($key) ?>"
+            <form method="POST" action="<?= admin_url('/admin/sponsors.php?cat=') . urlencode($key) ?>"
                   style="display:flex;align-items:center;gap:.4rem;margin:0;flex:1">
               <?= csrf_field() ?>
               <input type="hidden" name="action" value="update_url">
@@ -180,7 +177,7 @@ include __DIR__ . '/includes/header.php';
             </form>
           </div>
           <span class="sponsor-order">ordem <?= (int)$s['sort_order'] ?></span>
-          <form method="POST" action="/admin/sponsors.php"
+          <form method="POST" action="<?= admin_url('/admin/sponsors.php') ?>"
                 onsubmit="return confirm('Remover este logo?')"
                 style="margin:0">
             <?= csrf_field() ?>
@@ -201,7 +198,7 @@ include __DIR__ . '/includes/header.php';
   <div class="card-header-row" style="margin-bottom:1rem">
     <h2 style="font-size:1rem;font-weight:600;color:var(--green)">Adicionar logo — <?= e($label) ?></h2>
   </div>
-  <form method="POST" action="/admin/sponsors.php?cat=<?= urlencode($key) ?>"
+  <form method="POST" action="<?= admin_url('/admin/sponsors.php?cat=') . urlencode($key) ?>"
         enctype="multipart/form-data">
     <?= csrf_field() ?>
     <input type="hidden" name="action" value="upload">
