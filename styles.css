@@ -186,7 +186,7 @@ section{position:relative}
 }
 /* Slow golden nebula drift */
 .hero-nebula{
-  position:absolute;inset:-20%;pointer-events:none;will-change:transform;
+  position:absolute;top:-20vw;left:-20%;bottom:-20vw;right:-20%;pointer-events:none;will-change:transform;
   background:
     radial-gradient(ellipse 55% 42% at 68% 38%, rgba(201,162,75,.13), transparent 68%),
     radial-gradient(ellipse 35% 50% at 30% 68%, rgba(46,79,62,.42), transparent 62%);

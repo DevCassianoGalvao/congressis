@@ -30,18 +30,29 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <meta property="og:locale"      content="pt_BR">
 <meta name="twitter:card"       content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon-emblem.png">
-<link rel="preload" as="image" href="assets/imagemnova-hero-2.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/imagemnova-hero-2.webp" type="image/webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-texture.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=optional" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=optional"></noscript>
+<?php
+$_css_hash = substr(md5_file(__DIR__.'/styles.css'), 0, 8);
+?>
+<link rel="preload" as="style" href="styles.css?v=<?= $_css_hash ?>" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="styles.css?v=<?= $_css_hash ?>"></noscript>
 <style><?php
-$_css=file_get_contents(__DIR__.'/styles.css');
-$_css=preg_replace('/\/\*.*?\*\//s','',$_css);
-$_css=preg_replace('/\s+/',' ',$_css);
-$_css=preg_replace('/\s*([{}:;,>~+|])\s*/','$1',$_css);
-$_css=preg_replace('/;\}/','}',trim($_css));
+$_full_css = file_get_contents(__DIR__.'/styles.css');
+preg_match('/\/\*\s*=+\s+SOBRE\s+=/m', $_full_css, $_m1, PREG_OFFSET_CAPTURE);
+preg_match('/\/\*\s*=+\s+Reveal on scroll\s+=/m', $_full_css, $_m2, PREG_OFFSET_CAPTURE);
+$_p_nc  = $_m1 ? $_m1[0][1] : false;
+$_p_rev = $_m2 ? $_m2[0][1] : false;
+$_css   = ($_p_nc  !== false ? substr($_full_css, 0, $_p_nc)  : $_full_css)
+        . ($_p_rev !== false ? substr($_full_css, $_p_rev)     : '');
+$_css = preg_replace('/\/\*.*?\*\//s', '', $_css);
+$_css = preg_replace('/\s+/', ' ', $_css);
+$_css = preg_replace('/\s*([{}:;,>~+|])\s*/', '$1', $_css);
+$_css = preg_replace('/;}/', '}', trim($_css));
 echo $_css;
 ?></style>
 <?php if (isset($pdo)) inject_scripts($pdo, 'head'); ?>
@@ -53,8 +64,8 @@ echo $_css;
 <header class="hd" id="hd">
   <div class="wrap hd-inner">
     <a href="#top" class="brand" aria-label="Congressis — início">
-      <img src="assets/logos/logo-branca-sem-fundo.webp" alt="SYS Congressis" class="brand-logo logo-light-hd" width="320" height="64" decoding="async">
-      <img src="assets/logos/logo verde novo.webp" alt="SYS Congressis" class="brand-logo logo-dark-hd" width="320" height="58" decoding="async">
+      <img src="assets/logos/logo-branca-sem-fundo.webp" alt="SYS Congressis" class="brand-logo logo-light-hd" width="157" height="200" decoding="async">
+      <img src="assets/logos/logo verde novo.webp" alt="SYS Congressis" class="brand-logo logo-dark-hd" width="158" height="200" decoding="async">
     </a>
     <nav class="nav" aria-label="Navegação principal">
       <a href="#top">Início</a>
