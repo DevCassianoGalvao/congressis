@@ -2,12 +2,26 @@
 
 Options -Indexes
 
-# Bloquear acesso direto à pasta config/
+# Servir WebP automaticamente quando browser suporta e arquivo .webp existe
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # WebP auto-serve
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME} \.(png|jpe?g)$
+    RewriteCond %{REQUEST_FILENAME}\.webp -f
+    RewriteRule ^(.+)\.(png|jpe?g)$ $1.$2.webp [T=image/webp,E=webp:1,L]
+
+    # Segurança
     RewriteRule ^config/.*$ - [F,L]
     RewriteRule ^logs/.*$   - [F,L]
 </IfModule>
+
+<IfModule mod_headers.c>
+    Header append Vary Accept env=REDIRECT_webp
+</IfModule>
+
+AddType image/webp .webp
 
 # Bloquear acesso direto ao config.php independente do caminho
 <Files "config.php">

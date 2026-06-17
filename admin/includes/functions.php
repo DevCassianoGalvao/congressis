@@ -214,10 +214,9 @@ function validate_and_save_sponsor_logo(array $file, string $upload_dir): array 
         return [false, 'Tipo de arquivo inválido. Envie uma imagem real (jpg, png, svg, webp).', null];
     }
 
-    $new_filename = 'sponsor_' . uniqid() . '_' . time() . '.' . $ext;
-    $dest         = $upload_dir . $new_filename;
-
     if ($ext === 'svg') {
+        $new_filename = 'sponsor_' . uniqid() . '_' . time() . '.svg';
+        $dest         = $upload_dir . $new_filename;
         $svg = file_get_contents($file['tmp_name']);
         $svg = preg_replace('/<script[\s\S]*?<\/script>/i', '', $svg);
         $svg = preg_replace('/\bon\w+\s*=/i', 'data-removed=', $svg);
@@ -225,27 +224,20 @@ function validate_and_save_sponsor_logo(array $file, string $upload_dir): array 
             return [false, 'Erro ao salvar o arquivo SVG.', null];
         }
     } else {
-        if (!move_uploaded_file($file['tmp_name'], $dest)) {
-            return [false, 'Erro ao mover o arquivo enviado.', null];
-        }
-        $img = @imagecreatefromstring(file_get_contents($dest));
+        // Sempre salva como WebP independente do formato enviado
+        $new_filename = 'sponsor_' . uniqid() . '_' . time() . '.webp';
+        $dest         = $upload_dir . $new_filename;
+
+        $img = @imagecreatefromstring(file_get_contents($file['tmp_name']));
         if ($img === false) {
-            @unlink($dest);
             return [false, 'Imagem corrompida ou inválida.', null];
         }
-        if ($ext === 'png') {
-            imagealphablending($img, false);
-            imagesavealpha($img, true);
-            $saved = imagepng($img, $dest, 9);
-        } elseif ($ext === 'webp') {
-            $saved = imagewebp($img, $dest, 90);
-        } else {
-            $saved = imagejpeg($img, $dest, 90);
-        }
+        imagealphablending($img, false);
+        imagesavealpha($img, true);
+        $saved = imagewebp($img, $dest, 88);
         imagedestroy($img);
         if (!$saved) {
-            @unlink($dest);
-            return [false, 'Erro ao reprocessar a imagem.', null];
+            return [false, 'Erro ao converter a imagem para WebP.', null];
         }
     }
 
