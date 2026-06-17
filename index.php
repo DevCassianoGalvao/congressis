@@ -30,6 +30,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <meta property="og:locale"      content="pt_BR">
 <meta name="twitter:card"       content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon-emblem.png">
+<link rel="preload" as="image" href="assets/imagemnova-hero-2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -98,7 +99,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     <div class="hero-visual">
       <div class="hero-ring"></div>
       <div class="hero-frame">
-        <img src="assets/imagemnova-hero-2.png" alt="Vista aérea da Serra de Nova Friburgo" style="object-position:center 65%">
+        <img src="assets/imagemnova-hero-2.png" alt="Vista aérea da Serra de Nova Friburgo" style="object-position:center 65%" fetchpriority="high" decoding="sync">
       </div>
       <div class="hero-badge">
         <span class="n">29</span>
@@ -113,7 +114,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
   <div class="wrap sobre-grid">
     <div class="sobre-aside reveal">
       <div class="sobre-img">
-        <img src="assets/sobre-palestra.jpg" alt="Palestra em congresso" style="width:100%;height:100%;object-fit:cover;object-position:center 30%">
+        <img src="assets/sobre-palestra.jpg" alt="Palestra em congresso" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" loading="lazy" decoding="async">
       </div>
       <div class="sobre-quote">
         <p>"A verdadeira transformação da saúde acontece quando o cuidado é centrado na pessoa e vai além da doença."</p>
@@ -236,7 +237,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
         <?php foreach ($speakers as $_sp): ?>
         <article class="speaker reveal">
           <div class="sp-photo">
-            <div class="circle"><img src="<?= htmlspecialchars($_sp['photo_path']) ?>" alt="<?= htmlspecialchars($_sp['name']) ?>"></div>
+            <div class="circle"><img src="<?= htmlspecialchars($_sp['photo_path']) ?>" alt="<?= htmlspecialchars($_sp['name']) ?>" loading="lazy" decoding="async"></div>
             <?php if (!empty($_sp['flag']) && $_sp['flag'] === 'fr'): ?>
             <span class="sp-flag" title="França"><i class="b"></i><i class="w"></i><i class="r"></i></span>
             <?php endif; ?>
@@ -332,7 +333,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     <div class="ideal">
       <article class="ideal-row reveal">
         <div class="ideal-photo">
-          <div class="frame"><img src="assets/organizers/adryelle.png" alt="Dra. Adryelle Huber Puga"></div>
+          <div class="frame"><img src="assets/organizers/adryelle.png" alt="Dra. Adryelle Huber Puga" loading="lazy" decoding="async"></div>
         </div>
         <div class="ideal-text">
           <div class="ideal-role">Coidealizadora</div>
@@ -343,7 +344,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
       </article>
       <article class="ideal-row reveal">
         <div class="ideal-photo">
-          <div class="frame"><img src="assets/organizers/aretuza.jpeg" alt="Dra. Aretuza Pires dos Santos Lattanzi" style="transform:scale(1.35);transform-origin:50% 18%"></div>
+          <div class="frame"><img src="assets/organizers/aretuza.jpeg" alt="Dra. Aretuza Pires dos Santos Lattanzi" style="transform:scale(1.35);transform-origin:50% 18%" loading="lazy" decoding="async"></div>
         </div>
         <div class="ideal-text">
           <div class="ideal-role">Coidealizadora</div>
@@ -522,7 +523,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
   <div class="wrap">
     <div class="ft-grid">
       <div class="ft-brand">
-        <img src="assets/logos/logo-branca-sem-fundo.png" alt="Congressis" class="ft-logo">
+        <img src="assets/logos/logo-branca-sem-fundo.png" alt="Congressis" class="ft-logo" loading="lazy" decoding="async">
         <p><strong style="color:var(--cream-2)">Congressis – Saúde Integrativa na Serra.</strong> Realização: Dra. Adryelle Huber Puga e&nbsp;<span style="white-space:nowrap">Dra. Aretuza Pires dos Santos Lattanzi.</span></p>
       </div>
       <div class="ft-col">
@@ -622,7 +623,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
   </svg>
 </template>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 <?php if (isset($pdo)) inject_scripts($pdo, 'footer'); ?>
 <button id="backTop" class="back-top" aria-label="Voltar ao topo">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 15l-6-6-6 6"/></svg>
