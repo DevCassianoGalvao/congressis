@@ -29,13 +29,15 @@
   document.querySelectorAll('.faq-item').forEach(function(item){
     item.querySelector('.faq-q').addEventListener('click', function(){
       var isOpen = item.classList.contains('open');
+      var faqA = item.querySelector('.faq-a');
+      var targetH = isOpen ? 0 : faqA.scrollHeight; // read before DOM change to avoid forced reflow
       document.querySelectorAll('.faq-item.open').forEach(function(o){
         o.classList.remove('open');
         o.querySelector('.faq-a').style.maxHeight = null;
       });
       if(!isOpen){
         item.classList.add('open');
-        item.querySelector('.faq-a').style.maxHeight = item.querySelector('.faq-a').scrollHeight + 'px';
+        faqA.style.maxHeight = targetH + 'px';
       }
     });
   });

@@ -26,3 +26,4 @@ jobs:
             **/preview/**
             **/DEPLOY.md
             **/node_modules/**
+            **/_convert_webp.php
