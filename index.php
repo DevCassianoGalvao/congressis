@@ -411,16 +411,6 @@ echo $_css;
     </div>
     <div class="support">
 
-      <!-- Bloco 1 — Apoio Institucional (destaque) -->
-      <div class="support-group support-group--inst reveal">
-        <div class="gh gh--center"><h3>Apoio Institucional</h3><span class="ln"></span></div>
-        <div class="logo-grid logo-grid--center">
-          <div class="logo-slot logo-slot--lg">
-            <img src="assets/logos/SEBRAE-nacional-preto.webp" alt="Sebrae – Apoio Institucional" width="220" height="90" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
-
       <!-- Bloco 2 — Apoiadores -->
       <?php if (!empty($sponsors_by_cat['apoio'])): ?>
       <div class="support-group reveal">
