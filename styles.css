@@ -169,7 +169,7 @@ section{position:relative}
 }
 .hero-texture{
   position:absolute;inset:0;pointer-events:none;
-  background:url('assets/hero-texture.jpg') center/cover no-repeat;
+  background:url('assets/hero-texture.webp') center/cover no-repeat;
   mix-blend-mode:multiply;opacity:.8;
 }
 /* Topographic texture — lighter on photo bg */

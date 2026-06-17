@@ -30,10 +30,12 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
 <meta property="og:locale"      content="pt_BR">
 <meta name="twitter:card"       content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/favicon-emblem.png">
-<link rel="preload" as="image" href="assets/imagemnova-hero-2.png">
+<link rel="preload" as="image" href="assets/imagemnova-hero-2.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/hero-texture.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
 <?php if (isset($pdo)) inject_scripts($pdo, 'head'); ?>
 </head>
@@ -99,7 +101,7 @@ $_sponsor_labels = ['parceiros'=>'Parceiros','patrocinio'=>'Patrocínio','apoio'
     <div class="hero-visual">
       <div class="hero-ring"></div>
       <div class="hero-frame">
-        <img src="assets/imagemnova-hero-2.png" alt="Vista aérea da Serra de Nova Friburgo" style="object-position:center 65%" fetchpriority="high" decoding="sync">
+        <img src="assets/imagemnova-hero-2.webp" alt="Vista aérea da Serra de Nova Friburgo" style="object-position:center 65%" fetchpriority="high" decoding="sync">
       </div>
       <div class="hero-badge">
         <span class="n">29</span>

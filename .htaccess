@@ -6,11 +6,11 @@ Options -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # WebP auto-serve
+    # WebP auto-serve: hero.png → hero.webp (sem duplicar extensão)
     RewriteCond %{HTTP_ACCEPT} image/webp
-    RewriteCond %{REQUEST_FILENAME} \.(png|jpe?g)$
-    RewriteCond %{REQUEST_FILENAME}\.webp -f
-    RewriteRule ^(.+)\.(png|jpe?g)$ $1.$2.webp [T=image/webp,E=webp:1,L]
+    RewriteCond %{REQUEST_URI} ^(.+)\.(png|jpe?g)$
+    RewriteCond %{DOCUMENT_ROOT}%1.webp -f
+    RewriteRule ^(.+)\.(png|jpe?g)$ $1.webp [T=image/webp,E=webp:1,L]
 
     # Segurança
     RewriteRule ^config/.*$ - [F,L]
